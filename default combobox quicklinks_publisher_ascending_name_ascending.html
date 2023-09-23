@@ -1,0 +1,1549 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Publisher</title>
+    <link rel="manifest" href="manifest.webmanifest">
+	<meta name="viewport" content="width=device-width, initial-scale=0.5">
+	<style>
+h2:after,
+.cards .card figcaption,
+.cards .card:after {
+  position: absolute;
+}
+
+h2,
+h2 strong,
+.cards .card
+{
+  position: relative;
+}
+
+.cards {
+  display: flex;
+}
+
+h2,
+h2 strong,
+h2 span {
+  vertical-align: middle;
+}
+
+body {
+  background: #24282f;
+  font-family: 'Arial';
+}
+
+.wrapper {
+  padding: 15px;
+}
+
+h2 {
+  padding: 10px;
+  padding-left: 25px;
+  color: #ccc;
+  margin: 0;
+}
+
+h2 strong {
+  z-index: 2;
+  background: #24282f;
+  padding: 4px 8px;
+}
+
+h2 span {
+  font-size: 0.7em;
+  color: #aaa;
+  margin-left: 10px;
+}
+
+h2:after {
+  content: '';
+  z-index: 1;
+  bottom: 50%;
+  margin-bottom: -2px;
+  height: 2px;
+  left: 0;
+  right: 0;
+  background: #373d47;
+}
+
+.cards {
+  flex-flow: row wrap;
+}
+
+.cards .card {
+  margin: 20px;
+  width: 180px;
+  height: 270px;
+  overflow: hidden;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.8);
+  transform-origin: center top;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+  transition: 0.3s;
+}
+
+.cards .card img {
+  width: 100%;
+  min-height: 100%;
+}
+
+.cards .card figcaption {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 4px;
+  font-size: 16px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #DDD;
+  transition: 0.3s;
+}
+
+#h2jscript {
+  cursor:pointer;
+}
+
+.cards .card:hover,
+.cards .card:focus,
+.cards .card:active {
+  box-shadow: 0 8px 16px 3px rgba(0,0,0,0.6);
+  transform: translateY(-3px) scale(1.05) rotateX(15deg);
+}
+
+.cards .card:hover figcaption,
+.cards .card:focus figcaption,
+.cards .card:active figcaption {
+  transform: none;
+}
+
+.cards .card:hover:after,
+.cards .card:focus:after,
+.cards .card:active:after {
+  transform: rotate(25deg);
+  top: -40%;
+  opacity: 0.15;
+}
+
+.quicklinks {
+  display: flex;
+  flex-flow: row wrap;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.quicklink {
+  margin: 10px;
+}
+
+/* unvisited link */
+a:link {
+  color: #ccc;
+}
+/* visited link */
+a:visited {
+  color: #ccc;
+}
+/* mouse over link */
+a:hover {
+  color: #EEE;
+}
+/* selected link */
+a:active {
+  color: #ccc;
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+.Menu {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#BackTopButton {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: red; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 20px; /* Increase font size */
+}
+
+.MenuButton {
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: #555;/* Set a background color */
+  color: #ccc; /* Text color */
+  padding: 5px; /* Some padding */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 20px;/* Increase font size */
+  margin-top: 10px;
+  margin-left: 15px;
+  cursor:pointer;
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #666; /* Add a dark-grey background on hover */
+  color: #eee; /* Text color */
+}
+
+#BackTopButton:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
+}
+
+select#combobselect {
+    background-color:#555;
+    color:#CCC;
+}
+
+#label {
+   font-size: 20px;
+   color: #CCC;
+}
+
+input{
+  display: block;
+  background: #fff;
+  padding: .6rem;
+  border-radius: 0.3rem;
+  width: 300px;
+  border: 0.1rem solid #BDBDBD;
+  outline: none;
+  height: 1rem;
+}
+
+input:hover{
+	border: 0.1rem solid #0F52BA !important;
+}
+
+#searchbutton{
+  display: block;
+  background: #fff;
+  padding: .6rem;
+  border-radius: 0.3rem;
+  width: 175px;
+  border: 0.1rem solid #BDBDBD;
+  outline: none;
+  height: 2rem;
+}
+
+#searchbutton:hover{
+	border: 0.1rem solid #0F52BA !important;
+}
+	</style>
+   <script>
+	function search() {
+		var input, filter, games, game, cards, card, i, j, txtValue, wrapper, quicklinks, quicklink, quicklinkid, needhide, numvisible, quicklinklinks, quicklinkvalue;
+		input = document.getElementById("search");
+		filter = input.value.toUpperCase();
+
+		wrapper = document.getElementById("wrapper");
+		parentElement = wrapper.parentElement;
+		fragment = document.createDocumentFragment();
+		fragment.appendChild(wrapper.cloneNode(true));
+		wrapper.remove();
+		games = fragment.childNodes[0].getElementsByTagName("figcaption");
+		i = games.length - 1;
+		while (i >= 0) {
+			game = games[i];
+			txtValue = game.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				game.parentElement.parentElement.style.display = "";
+			} else {
+				game.parentElement.parentElement.style.display = "none";
+			}
+			i--;
+		}
+		
+		quicklinks = fragment.childNodes[0].querySelectorAll("div[id^='quicklink-']")
+		i = quicklinks.length - 1;
+		while (i >= 0) {
+			quicklink = quicklinks[i];
+			quicklinkid = quicklink.id;
+			quicklinkvalue = quicklinkid.replace("quicklink-", "");
+			cards = fragment.getElementById(quicklinkid.replace("quicklink-", ""));
+			needhide = true;
+			if(cards)
+			{
+			
+				j = cards.children.length -1
+				numvisible = 0;
+				while (j >= 0)
+				{
+					if (cards.children[j].style.display == "")
+					{
+						needhide = false;
+						numvisible++;
+					}
+					j--;
+				}
+				
+				quicklinklinks = fragment.childNodes[0].querySelectorAll("option[value=\"#" + quicklinkid.replace(/["\\]/g, '\\$&') + "\"]")
+				if (needhide)
+				{
+					quicklink.style.display = "none";
+					cards.style.display = "none";
+					if (quicklinklinks.length == 1)
+					{
+						quicklink.children[0].children[0].innerHTML = "&#x25BA;";
+						quicklink.children[0].children[0].style.color = "#790000";
+						quicklinklinks[0].innerText = quicklinkvalue + " (" + numvisible.toString() + ")";
+						quicklink.children[0].children[1].children[0].innerText = "(" + numvisible.toString() + ")"
+						quicklinklinks[0].style.display = "none";
+					}
+				} else {
+					quicklink.style.display = "";					
+					cards.style.display = "";
+					if (quicklinklinks.length == 1)
+					{
+						quicklink.children[0].children[0].innerHTML = "&#x25BC;";
+						quicklink.children[0].children[0].style.color = "#007962";
+						quicklinklinks[0].innerText = quicklinkvalue + " (" + numvisible.toString() + ")";
+						quicklink.children[0].children[1].children[0].innerText = "(" + numvisible.toString() + ")"
+						quicklinklinks[0].style.display = "";
+					}
+				}
+			}
+			i--;
+		}
+		
+		parentElement.appendChild(fragment.childNodes[0]);
+		
+		//have to renable this
+		const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+		observer.observe();
+		
+		// Get the input field
+		var input = document.getElementById("search");
+
+		// Execute a function when the user releases a key on the keyboard
+		input.addEventListener("keyup", function(event) {
+		  // Number 13 is the "Enter" key on the keyboard
+		  if (event.keyCode === 13) {
+			// Cancel the default action, if needed
+			event.preventDefault();
+			// Trigger the button element with a click
+			document.getElementById("searchbutton").click();
+		  }
+		});
+	}
+  </script>
+  </head>
+  <body>
+    <button onclick="topFunction()" id="BackTopButton" title="Go to top">Top</button>
+    <div class="wrapper" id="wrapper">
+      <h2><strong>MAIN MENU - Publisher<span>(Publisher ascending / Name ascending)</span></strong></h2>
+      <div class="Menu"><a Class="MenuButton" href="index.html">Platform ▲</A><a Class="MenuButton" href="default_name_ascending_name_ascending.html">Name ▲</A><a Class="MenuButton" href="default_source_ascending_name_ascending.html">Source ▲</A><a Class="MenuButton" href="default_library_ascending_name_ascending.html">Library ▲</A><a Class="MenuButton" href="default%20combobox%20quicklinks_releaseyear_descending_name_ascending.html">Release Year ▼</A><a Class="MenuButton" href="default_agerating_ascending_name_ascending.html">Age Rating ▲</A><a Class="MenuButton" href="default_favorite_ascending_name_ascending.html">Favorite ▲</A><a Class="MenuButton" href="default_lastactivitysegment_ascending_name_ascending.html">Last Activity Segment ▲</A><a Class="MenuButton" href="default_playtimecategory_ascending_name_ascending.html">Playtime Category ▲</A><a Class="MenuButton" href="default_region_ascending_name_ascending.html">Region ▲</A><a Class="MenuButton" href="default_completionstatus_ascending_name_ascending.html">Completion Status ▲</A><a Class="MenuButton" href="default%20combobox%20quicklinks_userscore_descending_name_ascending.html">User Score ▼</A><a Class="MenuButton" href="default_userscoregroup_ascending_name_ascending.html">User Score Group ▲</A><a Class="MenuButton" href="default_userscorerating_ascending_name_ascending.html">User Score Rating ▲</A><a Class="MenuButton" href="default%20combobox%20quicklinks_communityscore_descending_name_ascending.html">Community Score ▼</A><a Class="MenuButton" href="default_communityscoregroup_ascending_name_ascending.html">Community Score Group ▲</A><a Class="MenuButton" href="default_communityscorerating_ascending_name_ascending.html">Community Score Rating ▲</A><a Class="MenuButton" href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html">Critic Score ▼</A><a Class="MenuButton" href="default_criticscoregroup_ascending_name_ascending.html">Critic Score Group ▲</A><a Class="MenuButton" href="default_criticscorerating_ascending_name_ascending.html">Critic Score Rating ▲</A><a Class="MenuButton" href="default%20combobox%20quicklinks_category_ascending_name_ascending.html">Category ▲</A><a Class="MenuButton" href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html">Genre ▲</A><a Class="MenuButton" href="default_addedsegment_ascending_name_ascending.html">Added Segment ▲</A><a Class="MenuButton" href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html">Developer ▲</A><a Class="MenuButton" href="default%20combobox%20quicklinks_feature_ascending_name_ascending.html">Feature ▲</A><a Class="MenuButton" href="default_installationstatus_ascending_name_ascending.html">Installation Status ▲</A><a Class="MenuButton" href="default_iscustomgame_ascending_name_ascending.html">Custom Game ▲</A><a Class="MenuButton" href="default_modifiedsegment_ascending_name_ascending.html">Modified Segment ▲</A><a Class="MenuButton" href="default%20combobox%20quicklinks_playcount_descending_name_ascending.html">Play Count ▼</A><a Class="MenuButton" href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html">Publisher ▲</A><a Class="MenuButton" href="default%20combobox%20quicklinks_serie_ascending_name_ascending.html">Serie ▲</A><a Class="MenuButton" href="default_hidden_ascending_name_ascending.html">Hidden ▲</A><a Class="MenuButton" href="default%20combobox%20quicklinks_added_descending_name_ascending.html">Added ▼</A><a Class="MenuButton" href="default%20combobox%20quicklinks_lastactivity_descending_name_ascending.html">Last Activity ▼</A><a Class="MenuButton" href="default%20combobox%20quicklinks_modified_descending_name_ascending.html">Modified ▼</A><a Class="MenuButton" href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html">Release Date ▼</A><a Class="MenuButton" href="default%20combobox%20quicklinks_playtime_descending_name_ascending.html">Playtime ▼</A><a Class="MenuButton" href="default%20combobox%20quicklinks_tag_ascending_name_ascending.html">Tag ▲</A></div>
+      <h2><strong>Search</strong></h2><input type="text" id="search" placeholder="Type in a game name to search"><br/><button onclick="search()" id="searchbutton">Search</button>
+      <h2><strong>Quick Links</strong></h2>
+      <P id="label">Publisher: <select id="combobselect" onchange="window.location=this.options[this.selectedIndex].value"><option value="#quicklink-None">None (4)</option><option value="#quicklink-2K Games">2K Games (1)</option><option value="#quicklink-34BigThings">34BigThings (1)</option><option value="#quicklink-505 Games">505 Games (3)</option><option value="#quicklink-Activision">Activision (1)</option><option value="#quicklink-Aksys Games">Aksys Games (1)</option><option value="#quicklink-Annapurna Interactive">Annapurna Interactive (2)</option><option value="#quicklink-Arc System Works">Arc System Works (1)</option><option value="#quicklink-Armor Games">Armor Games (1)</option><option value="#quicklink-Artdink">Artdink (1)</option><option value="#quicklink-Atari">Atari (2)</option><option value="#quicklink-Atlus">Atlus (3)</option><option value="#quicklink-Bandai">Bandai (1)</option><option value="#quicklink-Bandai Namco Entertainment">Bandai Namco Entertainment (7)</option><option value="#quicklink-Beijing Perfect World">Beijing Perfect World (1)</option><option value="#quicklink-Bethesda Softworks">Bethesda Softworks (1)</option><option value="#quicklink-Blue Mammoth Games">Blue Mammoth Games (1)</option><option value="#quicklink-Capcom">Capcom (9)</option><option value="#quicklink-cdp.pl">cdp.pl (1)</option><option value="#quicklink-Chucklefish Games">Chucklefish Games (1)</option><option value="#quicklink-Codemasters">Codemasters (1)</option><option value="#quicklink-ConcernedApe">ConcernedApe (1)</option><option value="#quicklink-Curve Digital">Curve Digital (1)</option><option value="#quicklink-CyberFront">CyberFront (1)</option><option value="#quicklink-Devolver Digital">Devolver Digital (1)</option><option value="#quicklink-Drinkbox Studios">Drinkbox Studios (1)</option><option value="#quicklink-DTP Entertainment">DTP Entertainment (1)</option><option value="#quicklink-Early Melon">Early Melon (1)</option><option value="#quicklink-Electronic Arts">Electronic Arts (1)</option><option value="#quicklink-Freebird Games">Freebird Games (1)</option><option value="#quicklink-FromSoftware">FromSoftware (2)</option><option value="#quicklink-hasuhasu">hasuhasu (1)</option><option value="#quicklink-Headup Games">Headup Games (1)</option><option value="#quicklink-Hirameki">Hirameki (1)</option><option value="#quicklink-Hudson Soft">Hudson Soft (1)</option><option value="#quicklink-iam8bit">iam8bit (1)</option><option value="#quicklink-iQue">iQue (5)</option><option value="#quicklink-Ironhide Game Studio">Ironhide Game Studio (1)</option><option value="#quicklink-JSL ENTERTAINMENT">JSL ENTERTAINMENT (1)</option><option value="#quicklink-KID">KID (1)</option><option value="#quicklink-Koei Tecmo Games">Koei Tecmo Games (1)</option><option value="#quicklink-Konami">Konami (8)</option><option value="#quicklink-Kumobius">Kumobius (1)</option><option value="#quicklink-Larian Studios">Larian Studios (1)</option><option value="#quicklink-Maddy Makes Games">Maddy Makes Games (1)</option><option value="#quicklink-Microsoft Game Studios">Microsoft Game Studios (2)</option><option value="#quicklink-Microsoft Studios">Microsoft Studios (1)</option><option value="#quicklink-Mojang Studios">Mojang Studios (1)</option><option value="#quicklink-Motion Twin">Motion Twin (1)</option><option value="#quicklink-Namco">Namco (1)</option><option value="#quicklink-Nicalis, Inc.">Nicalis, Inc. (1)</option><option value="#quicklink-Nintendo">Nintendo (14)</option><option value="#quicklink-Number None Inc.">Number None Inc. (1)</option><option value="#quicklink-Playdead">Playdead (2)</option><option value="#quicklink-Playdigious">Playdigious (1)</option><option value="#quicklink-Playtronic">Playtronic (1)</option><option value="#quicklink-Quest">Quest (1)</option><option value="#quicklink-Rage Software">Rage Software (1)</option><option value="#quicklink-Raw Fury Games">Raw Fury Games (1)</option><option value="#quicklink-Re-Logic">Re-Logic (1)</option><option value="#quicklink-RewindApp">RewindApp (1)</option><option value="#quicklink-Rising Star Games">Rising Star Games (1)</option><option value="#quicklink-Riverhillsoft">Riverhillsoft (1)</option><option value="#quicklink-Rockstar Games">Rockstar Games (1)</option><option value="#quicklink-Runic Games">Runic Games (1)</option><option value="#quicklink-Sega">Sega (1)</option><option value="#quicklink-Shiro Games">Shiro Games (1)</option><option value="#quicklink-Ska Studios">Ska Studios (1)</option><option value="#quicklink-SNK Playmore">SNK Playmore (1)</option><option value="#quicklink-Sony Interactive Entertainment">Sony Interactive Entertainment (1)</option><option value="#quicklink-Spike">Spike (1)</option><option value="#quicklink-Spike ChunSoft">Spike ChunSoft (2)</option><option value="#quicklink-Square Enix">Square Enix (3)</option><option value="#quicklink-Success Corporation">Success Corporation (1)</option><option value="#quicklink-Supergiant Games">Supergiant Games (1)</option><option value="#quicklink-Take-Two Interactive">Take-Two Interactive (1)</option><option value="#quicklink-Team Cherry">Team Cherry (1)</option><option value="#quicklink-Technos Japan">Technos Japan (2)</option><option value="#quicklink-Thomas Happ Games">Thomas Happ Games (1)</option><option value="#quicklink-Tomy">Tomy (1)</option><option value="#quicklink-Ubisoft Entertainment">Ubisoft Entertainment (3)</option><option value="#quicklink-WB Games">WB Games (1)</option><option value="#quicklink-WindySoft">WindySoft (1)</option><option value="#quicklink-Wizards of the Coast LLC">Wizards of the Coast LLC (1)</option><option value="#quicklink-X.D. Network Inc.">X.D. Network Inc. (2)</option><option value="#quicklink-Xbox Game Studios">Xbox Game Studios (1)</option></select></P>
+      <div id="quicklink-None"><h2 id="h2jscript" onclick="ShowHide('None')"><strong id="eye-None" style="color: #007962;">&#x25BC;</strong><strong>None<span>( 4 )</span></strong></h2></div>
+<div id="None" class="cards">
+<figure class="card">
+  <a href="aaeb6458-14d7-4f4e-99ab-082f55b43a1f.html">
+  <img class="lozad" data-src="aaeb6458-14d7-4f4e-99ab-082f55b43a1f/0ae5d27b-09e2-4326-a815-343784a281f7.jpg"/>
+  <figcaption>三国杀</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="f5238d98-6c23-4dff-a384-a61a5ceafdb7.html">
+  <img class="lozad" data-src="f5238d98-6c23-4dff-a384-a61a5ceafdb7/883db756-1e1c-4c08-8fb8-7bc4b574184f.jpg"/>
+  <figcaption>古剑奇谭3</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="b9985345-57e3-4c8f-aa06-010982317c71.html">
+  <img class="lozad" data-src="b9985345-57e3-4c8f-aa06-010982317c71/d19bc7e5-60fa-4105-a462-5d925d1792b7.jpg"/>
+  <figcaption>拳皇EX2：咆哮之血</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="2e34836e-a1f7-4984-9965-2d1d07cbfcc5.html">
+  <img class="lozad" data-src="2e34836e-a1f7-4984-9965-2d1d07cbfcc5/fc502a55-df5e-44de-9bc1-5fa6dfa43bfb.jpg"/>
+  <figcaption>超级兔子人</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-2K Games"><h2 id="h2jscript" onclick="ShowHide('2K Games')"><strong id="eye-2K Games" style="color: #007962;">&#x25BC;</strong><strong>2K Games<span>( 1 )</span></strong></h2></div>
+<div id="2K Games" class="cards">
+<figure class="card">
+  <a href="8f0eb0b8-bfbe-43cd-9786-38dac6064173.html">
+  <img class="lozad" data-src="8f0eb0b8-bfbe-43cd-9786-38dac6064173/797cda61-4c4e-42b8-a8bd-abebc7b609ac.jpg"/>
+  <figcaption>生化奇兵：无限</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-34BigThings"><h2 id="h2jscript" onclick="ShowHide('34BigThings')"><strong id="eye-34BigThings" style="color: #007962;">&#x25BC;</strong><strong>34BigThings<span>( 1 )</span></strong></h2></div>
+<div id="34BigThings" class="cards">
+<figure class="card">
+  <a href="41757a9e-d070-4347-a324-0f3ed86ad186.html">
+  <img class="lozad" data-src="41757a9e-d070-4347-a324-0f3ed86ad186/10ac7723-5268-4d48-b04c-2c0ae1afc317.jpg"/>
+  <figcaption>红视：增强版</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-505 Games"><h2 id="h2jscript" onclick="ShowHide('505 Games')"><strong id="eye-505 Games" style="color: #007962;">&#x25BC;</strong><strong>505 Games<span>( 3 )</span></strong></h2></div>
+<div id="505 Games" class="cards">
+<figure class="card">
+  <a href="ce9f446d-12fb-4b8c-b338-63b112294fbf.html">
+  <img class="lozad" data-src="ce9f446d-12fb-4b8c-b338-63b112294fbf/2227c159-c328-4514-ace6-c0c0c001aae7.jpg"/>
+  <figcaption>泰拉瑞亚</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="41757a9e-d070-4347-a324-0f3ed86ad186.html">
+  <img class="lozad" data-src="41757a9e-d070-4347-a324-0f3ed86ad186/10ac7723-5268-4d48-b04c-2c0ae1afc317.jpg"/>
+  <figcaption>红视：增强版</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="f845f8ce-6375-4d6b-987a-d6a6c89e950b.html">
+  <img class="lozad" data-src="f845f8ce-6375-4d6b-987a-d6a6c89e950b/3d292cf0-a377-4db1-a75a-b5956535e3d5.jpg"/>
+  <figcaption>赤痕：夜之仪式</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Activision"><h2 id="h2jscript" onclick="ShowHide('Activision')"><strong id="eye-Activision" style="color: #007962;">&#x25BC;</strong><strong>Activision<span>( 1 )</span></strong></h2></div>
+<div id="Activision" class="cards">
+<figure class="card">
+  <a href="5ef64e4c-3e9d-4cb8-ae6f-58da69b3d4e1.html">
+  <img class="lozad" data-src="5ef64e4c-3e9d-4cb8-ae6f-58da69b3d4e1/db6709b8-6258-41f7-bf1d-d8184fe1fe83.jpg"/>
+  <figcaption>只狼：影逝二度</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Aksys Games"><h2 id="h2jscript" onclick="ShowHide('Aksys Games')"><strong id="eye-Aksys Games" style="color: #007962;">&#x25BC;</strong><strong>Aksys Games<span>( 1 )</span></strong></h2></div>
+<div id="Aksys Games" class="cards">
+<figure class="card">
+  <a href="75ffcc07-d874-492a-bbb6-f5546034a506.html">
+  <img class="lozad" data-src="75ffcc07-d874-492a-bbb6-f5546034a506/99ade8fa-f13e-4306-815a-e952d5ad71ec.jpg"/>
+  <figcaption>999极限脱出</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Annapurna Interactive"><h2 id="h2jscript" onclick="ShowHide('Annapurna Interactive')"><strong id="eye-Annapurna Interactive" style="color: #007962;">&#x25BC;</strong><strong>Annapurna Interactive<span>( 2 )</span></strong></h2></div>
+<div id="Annapurna Interactive" class="cards">
+<figure class="card">
+  <a href="5493c81f-e5a3-4f5a-a660-ead70262f85f.html">
+  <img class="lozad" data-src="5493c81f-e5a3-4f5a-a660-ead70262f85f/cff88070-7317-485c-bd07-3b7b57379dc0.jpg"/>
+  <figcaption>星际拓荒</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="cbb45ddc-5859-41ed-a53d-3d99e9a9c3b7.html">
+  <img class="lozad" data-src="cbb45ddc-5859-41ed-a53d-3d99e9a9c3b7/c52d54d9-d7d2-49bb-bc5a-622cb3712695.jpg"/>
+  <figcaption>画中世界</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Arc System Works"><h2 id="h2jscript" onclick="ShowHide('Arc System Works')"><strong id="eye-Arc System Works" style="color: #007962;">&#x25BC;</strong><strong>Arc System Works<span>( 1 )</span></strong></h2></div>
+<div id="Arc System Works" class="cards">
+<figure class="card">
+  <a href="1771d1d4-5cbf-4e29-b072-79f2626074ee.html">
+  <img class="lozad" data-src="1771d1d4-5cbf-4e29-b072-79f2626074ee/9df5c009-9e83-4fb5-8556-c865eba5418e.jpg"/>
+  <figcaption>热血足球</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Armor Games"><h2 id="h2jscript" onclick="ShowHide('Armor Games')"><strong id="eye-Armor Games" style="color: #007962;">&#x25BC;</strong><strong>Armor Games<span>( 1 )</span></strong></h2></div>
+<div id="Armor Games" class="cards">
+<figure class="card">
+  <a href="976064d9-1fab-4fbd-8cd1-c57bc8093878.html">
+  <img class="lozad" data-src="976064d9-1fab-4fbd-8cd1-c57bc8093878/bea9810a-52ee-4e6b-82f1-3dc4446bf394.jpg"/>
+  <figcaption>王国保卫战</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Artdink"><h2 id="h2jscript" onclick="ShowHide('Artdink')"><strong id="eye-Artdink" style="color: #007962;">&#x25BC;</strong><strong>Artdink<span>( 1 )</span></strong></h2></div>
+<div id="Artdink" class="cards">
+<figure class="card">
+  <a href="ec3e0df7-b2e4-4f39-844f-372f56597305.html">
+  <img class="lozad" data-src="ec3e0df7-b2e4-4f39-844f-372f56597305/af5c16be-f58b-4f77-932e-9ead330439a3.jpg"/>
+  <figcaption>皇家骑士团：命运之轮</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Atari"><h2 id="h2jscript" onclick="ShowHide('Atari')"><strong id="eye-Atari" style="color: #007962;">&#x25BC;</strong><strong>Atari<span>( 2 )</span></strong></h2></div>
+<div id="Atari" class="cards">
+<figure class="card">
+  <a href="2c87283c-8767-4902-8542-0fc2bdda4551.html">
+  <img class="lozad" data-src="2c87283c-8767-4902-8542-0fc2bdda4551/5a10634e-0f50-438c-a230-094174505273.jpg"/>
+  <figcaption>龙珠Z：悟空的遗产2</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="3c1cc84c-4557-48a0-b35d-5afd55846735.html">
+  <img class="lozad" data-src="3c1cc84c-4557-48a0-b35d-5afd55846735/1b646639-bf13-45d0-9bde-cea15053dd64.jpg"/>
+  <figcaption>龙珠Z：武空斗剧</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Atlus"><h2 id="h2jscript" onclick="ShowHide('Atlus')"><strong id="eye-Atlus" style="color: #007962;">&#x25BC;</strong><strong>Atlus<span>( 3 )</span></strong></h2></div>
+<div id="Atlus" class="cards">
+<figure class="card">
+  <a href="b2d13a77-1cf3-432a-bbdd-b2180cdbb5ce.html">
+  <img class="lozad" data-src="b2d13a77-1cf3-432a-bbdd-b2180cdbb5ce/d8dbe6e4-2c15-495d-894d-faaa82546ffa.jpg"/>
+  <figcaption>拳皇13</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="bc9e75f7-af86-4315-b291-c832d96d2e78.html">
+  <img class="lozad" data-src="bc9e75f7-af86-4315-b291-c832d96d2e78/bb940894-8ec7-4ea9-b3d5-800f5fa3a54f.jpg"/>
+  <figcaption>热血物语EX</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="ec3e0df7-b2e4-4f39-844f-372f56597305.html">
+  <img class="lozad" data-src="ec3e0df7-b2e4-4f39-844f-372f56597305/af5c16be-f58b-4f77-932e-9ead330439a3.jpg"/>
+  <figcaption>皇家骑士团：命运之轮</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Bandai"><h2 id="h2jscript" onclick="ShowHide('Bandai')"><strong id="eye-Bandai" style="color: #007962;">&#x25BC;</strong><strong>Bandai<span>( 1 )</span></strong></h2></div>
+<div id="Bandai" class="cards">
+<figure class="card">
+  <a href="3c1cc84c-4557-48a0-b35d-5afd55846735.html">
+  <img class="lozad" data-src="3c1cc84c-4557-48a0-b35d-5afd55846735/1b646639-bf13-45d0-9bde-cea15053dd64.jpg"/>
+  <figcaption>龙珠Z：武空斗剧</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Bandai Namco Entertainment"><h2 id="h2jscript" onclick="ShowHide('Bandai Namco Entertainment')"><strong id="eye-Bandai Namco Entertainment" style="color: #007962;">&#x25BC;</strong><strong>Bandai Namco Entertainment<span>( 7 )</span></strong></h2></div>
+<div id="Bandai Namco Entertainment" class="cards">
+<figure class="card">
+  <a href="751fb188-cfc3-49c7-a7df-c4137d8b5bc2.html">
+  <img class="lozad" data-src="751fb188-cfc3-49c7-a7df-c4137d8b5bc2/251413cd-fc53-451d-8b2f-2a1f5bde8b4b.jpg"/>
+  <figcaption>小小梦魇</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="dd434e24-593d-42ca-8ce7-d291ffeb8fc0.html">
+  <img class="lozad" data-src="dd434e24-593d-42ca-8ce7-d291ffeb8fc0/fdfb4d2f-d405-4281-b991-baf2a97480c9.jpg"/>
+  <figcaption>巫师3：狂猎</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="03d62d5b-5c4b-44e8-9f55-b9eb658d4c7d.html">
+  <img class="lozad" data-src="03d62d5b-5c4b-44e8-9f55-b9eb658d4c7d/1d79bdce-aaee-4de0-95d7-8843f391f858.jpg"/>
+  <figcaption>神界：原罪2</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="0d43d75f-7bb8-4730-89f3-8271a4de8780.html">
+  <img class="lozad" data-src="0d43d75f-7bb8-4730-89f3-8271a4de8780/386c89c5-402f-4fcf-9c20-5e1e16610f7b.jpg"/>
+  <figcaption>艾尔登法环</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="54d33f81-b1b9-46d3-835a-5e46dad47fc3.html">
+  <img class="lozad" data-src="54d33f81-b1b9-46d3-835a-5e46dad47fc3/942d433b-52ee-42bb-a108-7e52d6b0471c.jpg"/>
+  <figcaption>风之少年：梦之帝国</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="1d16e608-891a-4610-a93d-85a1ad130c7f.html">
+  <img class="lozad" data-src="1d16e608-891a-4610-a93d-85a1ad130c7f/eb086d48-363b-4dc5-b4f5-1423eb6a0a8b.jpg"/>
+  <figcaption>黑暗之魂3</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="a69b0606-b293-4c78-aeb3-a5c0d93e960c.html">
+  <img class="lozad" data-src="a69b0606-b293-4c78-aeb3-a5c0d93e960c/5b152b41-9270-4ae5-8dc8-0ab4b9d7e7d9.jpg"/>
+  <figcaption>黑暗之魂重制版</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Beijing Perfect World"><h2 id="h2jscript" onclick="ShowHide('Beijing Perfect World')"><strong id="eye-Beijing Perfect World" style="color: #007962;">&#x25BC;</strong><strong>Beijing Perfect World<span>( 1 )</span></strong></h2></div>
+<div id="Beijing Perfect World" class="cards">
+<figure class="card">
+  <a href="4a34ad90-1596-4576-8682-de13c5dd20af.html">
+  <img class="lozad" data-src="4a34ad90-1596-4576-8682-de13c5dd20af/b9106a94-38fc-4f86-b327-7a0cb4035f3a.jpg"/>
+  <figcaption>火炬之光2</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Bethesda Softworks"><h2 id="h2jscript" onclick="ShowHide('Bethesda Softworks')"><strong id="eye-Bethesda Softworks" style="color: #007962;">&#x25BC;</strong><strong>Bethesda Softworks<span>( 1 )</span></strong></h2></div>
+<div id="Bethesda Softworks" class="cards">
+<figure class="card">
+  <a href="e8992a29-b6ed-4252-91ef-3c217697339b.html">
+  <img class="lozad" data-src="e8992a29-b6ed-4252-91ef-3c217697339b/2c4dff8a-535d-4a70-b8e7-8346b930de66.jpg"/>
+  <figcaption>上古卷轴5</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Blue Mammoth Games"><h2 id="h2jscript" onclick="ShowHide('Blue Mammoth Games')"><strong id="eye-Blue Mammoth Games" style="color: #007962;">&#x25BC;</strong><strong>Blue Mammoth Games<span>( 1 )</span></strong></h2></div>
+<div id="Blue Mammoth Games" class="cards">
+<figure class="card">
+  <a href="c0977ce3-9c5e-4b69-bebc-483b50919a2e.html">
+  <img class="lozad" data-src="c0977ce3-9c5e-4b69-bebc-483b50919a2e/86316a4a-d8a8-47e3-b5ed-b8d328527bb7.jpg"/>
+  <figcaption>英灵乱战</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Capcom"><h2 id="h2jscript" onclick="ShowHide('Capcom')"><strong id="eye-Capcom" style="color: #007962;">&#x25BC;</strong><strong>Capcom<span>( 9 )</span></strong></h2></div>
+<div id="Capcom" class="cards">
+<figure class="card">
+  <a href="60f69e4f-d7f5-40a3-a097-a2a30946a946.html">
+  <img class="lozad" data-src="60f69e4f-d7f5-40a3-a097-a2a30946a946/5ae27aa6-4235-45d7-b15a-e0b50cc75226.jpg"/>
+  <figcaption>大逆转裁判：编年史</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="ac692afd-5187-446c-87f8-91624493e402.html">
+  <img class="lozad" data-src="ac692afd-5187-446c-87f8-91624493e402/b14485b4-3eb2-451b-9cd3-fd23efc7f2c1.jpg"/>
+  <figcaption>希魔复活：重装上阵</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="23a78bd0-9bf6-4088-8c72-88a1929d5b0e.html">
+  <img class="lozad" data-src="23a78bd0-9bf6-4088-8c72-88a1929d5b0e/52689f7a-20c8-48a2-aa17-e1f42010d94d.jpg"/>
+  <figcaption>幽灵轨迹</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="e36a08a5-595d-4b1f-88f7-85482a1e8fc3.html">
+  <img class="lozad" data-src="e36a08a5-595d-4b1f-88f7-85482a1e8fc3/b419c01e-d961-462f-93ed-7401c0ae2da4.jpg"/>
+  <figcaption>逆转裁判1</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="b656eaed-a122-4982-a7c2-5a6563680981.html">
+  <img class="lozad" data-src="b656eaed-a122-4982-a7c2-5a6563680981/e9736ba4-fb89-42f5-9fd9-58873e88aae1.jpg"/>
+  <figcaption>逆转裁判2</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="8f8f5c09-5cf4-4bc7-a0a5-bd9005ef41a3.html">
+  <img class="lozad" data-src="8f8f5c09-5cf4-4bc7-a0a5-bd9005ef41a3/8b29a9fa-798c-4b46-b898-08bd62595413.jpg"/>
+  <figcaption>逆转裁判3</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="1dc62311-2dd3-4b22-a0c4-4a9a15da1b5f.html">
+  <img class="lozad" data-src="1dc62311-2dd3-4b22-a0c4-4a9a15da1b5f/995ad874-09c6-4436-b643-85afc640693d.jpg"/>
+  <figcaption>逆转裁判4</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="268c1edd-39c6-4a5b-8a1f-7c6956a33295.html">
+  <img class="lozad" data-src="268c1edd-39c6-4a5b-8a1f-7c6956a33295/98f4e293-90a1-48b0-88aa-35b39e1f116c.jpg"/>
+  <figcaption>逆转裁判5</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="0ca9da6c-0475-4ba4-8800-8033b4fb3c91.html">
+  <img class="lozad" data-src="0ca9da6c-0475-4ba4-8800-8033b4fb3c91/d2b69f7f-ee18-49d6-a437-09f3ec397278.jpg"/>
+  <figcaption>阿修罗之怒</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-cdp.pl"><h2 id="h2jscript" onclick="ShowHide('cdp.pl')"><strong id="eye-cdp.pl" style="color: #007962;">&#x25BC;</strong><strong>cdp.pl<span>( 1 )</span></strong></h2></div>
+<div id="cdp.pl" class="cards">
+<figure class="card">
+  <a href="dd434e24-593d-42ca-8ce7-d291ffeb8fc0.html">
+  <img class="lozad" data-src="dd434e24-593d-42ca-8ce7-d291ffeb8fc0/fdfb4d2f-d405-4281-b991-baf2a97480c9.jpg"/>
+  <figcaption>巫师3：狂猎</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Chucklefish Games"><h2 id="h2jscript" onclick="ShowHide('Chucklefish Games')"><strong id="eye-Chucklefish Games" style="color: #007962;">&#x25BC;</strong><strong>Chucklefish Games<span>( 1 )</span></strong></h2></div>
+<div id="Chucklefish Games" class="cards">
+<figure class="card">
+  <a href="26ec55b9-7924-4178-b844-0ae5d9200613.html">
+  <img class="lozad" data-src="26ec55b9-7924-4178-b844-0ae5d9200613/934de8a9-22a3-4c7d-b492-f001628ef8e6.jpg"/>
+  <figcaption>星露谷物语</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Codemasters"><h2 id="h2jscript" onclick="ShowHide('Codemasters')"><strong id="eye-Codemasters" style="color: #007962;">&#x25BC;</strong><strong>Codemasters<span>( 1 )</span></strong></h2></div>
+<div id="Codemasters" class="cards">
+<figure class="card">
+  <a href="5d7d0064-0673-4914-b88c-6d30ac4ac186.html">
+  <img class="lozad" data-src="5d7d0064-0673-4914-b88c-6d30ac4ac186/aab05fd8-3541-4880-a2c0-ae040014cf00.jpg"/>
+  <figcaption>尘埃3</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-ConcernedApe"><h2 id="h2jscript" onclick="ShowHide('ConcernedApe')"><strong id="eye-ConcernedApe" style="color: #007962;">&#x25BC;</strong><strong>ConcernedApe<span>( 1 )</span></strong></h2></div>
+<div id="ConcernedApe" class="cards">
+<figure class="card">
+  <a href="26ec55b9-7924-4178-b844-0ae5d9200613.html">
+  <img class="lozad" data-src="26ec55b9-7924-4178-b844-0ae5d9200613/934de8a9-22a3-4c7d-b492-f001628ef8e6.jpg"/>
+  <figcaption>星露谷物语</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Curve Digital"><h2 id="h2jscript" onclick="ShowHide('Curve Digital')"><strong id="eye-Curve Digital" style="color: #007962;">&#x25BC;</strong><strong>Curve Digital<span>( 1 )</span></strong></h2></div>
+<div id="Curve Digital" class="cards">
+<figure class="card">
+  <a href="131cac39-9b08-4b9b-a5a1-e4b61a442278.html">
+  <img class="lozad" data-src="131cac39-9b08-4b9b-a5a1-e4b61a442278/95d63048-e674-4c44-9fcb-f4a9401c30af.jpg"/>
+  <figcaption>人类一败涂地</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-CyberFront"><h2 id="h2jscript" onclick="ShowHide('CyberFront')"><strong id="eye-CyberFront" style="color: #007962;">&#x25BC;</strong><strong>CyberFront<span>( 1 )</span></strong></h2></div>
+<div id="CyberFront" class="cards">
+<figure class="card">
+  <a href="09c69548-8b0e-41ed-8285-45085b39f26d.html">
+  <img class="lozad" data-src="09c69548-8b0e-41ed-8285-45085b39f26d/9416b2ee-97ea-4bf4-bb90-595d88b12e86.jpg"/>
+  <figcaption>时空轮回</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Devolver Digital"><h2 id="h2jscript" onclick="ShowHide('Devolver Digital')"><strong id="eye-Devolver Digital" style="color: #007962;">&#x25BC;</strong><strong>Devolver Digital<span>( 1 )</span></strong></h2></div>
+<div id="Devolver Digital" class="cards">
+<figure class="card">
+  <a href="1cef2395-ab62-4c18-9f0f-671ab0e8f289.html">
+  <img class="lozad" data-src="1cef2395-ab62-4c18-9f0f-671ab0e8f289/7d23832e-3c17-4d90-aa20-f51d17bac825.jpg"/>
+  <figcaption>武装原型</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Drinkbox Studios"><h2 id="h2jscript" onclick="ShowHide('Drinkbox Studios')"><strong id="eye-Drinkbox Studios" style="color: #007962;">&#x25BC;</strong><strong>Drinkbox Studios<span>( 1 )</span></strong></h2></div>
+<div id="Drinkbox Studios" class="cards">
+<figure class="card">
+  <a href="63daf752-b470-4b09-ac51-e214ce82cb27.html">
+  <img class="lozad" data-src="63daf752-b470-4b09-ac51-e214ce82cb27/214b4269-c772-4bf6-b1aa-3554c5adae8e.jpg"/>
+  <figcaption>墨西哥英雄大混战</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-DTP Entertainment"><h2 id="h2jscript" onclick="ShowHide('DTP Entertainment')"><strong id="eye-DTP Entertainment" style="color: #007962;">&#x25BC;</strong><strong>DTP Entertainment<span>( 1 )</span></strong></h2></div>
+<div id="DTP Entertainment" class="cards">
+<figure class="card">
+  <a href="4162d0dc-b82f-440d-ac80-234ae04e4c33.html">
+  <img class="lozad" data-src="4162d0dc-b82f-440d-ac80-234ae04e4c33/8e0b5a25-ab6c-4cbd-aac4-b4c6713edcaa.jpg"/>
+  <figcaption>黑镜3</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Early Melon"><h2 id="h2jscript" onclick="ShowHide('Early Melon')"><strong id="eye-Early Melon" style="color: #007962;">&#x25BC;</strong><strong>Early Melon<span>( 1 )</span></strong></h2></div>
+<div id="Early Melon" class="cards">
+<figure class="card">
+  <a href="733eb737-36c3-4ed8-acef-9b20e4657a7a.html">
+  <img class="lozad" data-src="733eb737-36c3-4ed8-acef-9b20e4657a7a/ae46fe35-91dd-4243-98ac-fe89d3ca0f93.jpg"/>
+  <figcaption>屋顶乱斗</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Electronic Arts"><h2 id="h2jscript" onclick="ShowHide('Electronic Arts')"><strong id="eye-Electronic Arts" style="color: #007962;">&#x25BC;</strong><strong>Electronic Arts<span>( 1 )</span></strong></h2></div>
+<div id="Electronic Arts" class="cards">
+<figure class="card">
+  <a href="3303f9bd-d964-4fa0-a4a4-3ec14de9c768.html">
+  <img class="lozad" data-src="3303f9bd-d964-4fa0-a4a4-3ec14de9c768/e4abeac3-a5bd-44e8-883a-fb5d87d288c2.jpg"/>
+  <figcaption>双人成行</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Freebird Games"><h2 id="h2jscript" onclick="ShowHide('Freebird Games')"><strong id="eye-Freebird Games" style="color: #007962;">&#x25BC;</strong><strong>Freebird Games<span>( 1 )</span></strong></h2></div>
+<div id="Freebird Games" class="cards">
+<figure class="card">
+  <a href="77c50b0d-1a03-49ab-8ab0-7f7bbdb882ce.html">
+  <img class="lozad" data-src="77c50b0d-1a03-49ab-8ab0-7f7bbdb882ce/0899e1b6-2db1-46cf-a77c-c2f496883043.jpg"/>
+  <figcaption>去月球</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-FromSoftware"><h2 id="h2jscript" onclick="ShowHide('FromSoftware')"><strong id="eye-FromSoftware" style="color: #007962;">&#x25BC;</strong><strong>FromSoftware<span>( 2 )</span></strong></h2></div>
+<div id="FromSoftware" class="cards">
+<figure class="card">
+  <a href="0d43d75f-7bb8-4730-89f3-8271a4de8780.html">
+  <img class="lozad" data-src="0d43d75f-7bb8-4730-89f3-8271a4de8780/386c89c5-402f-4fcf-9c20-5e1e16610f7b.jpg"/>
+  <figcaption>艾尔登法环</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="1d16e608-891a-4610-a93d-85a1ad130c7f.html">
+  <img class="lozad" data-src="1d16e608-891a-4610-a93d-85a1ad130c7f/eb086d48-363b-4dc5-b4f5-1423eb6a0a8b.jpg"/>
+  <figcaption>黑暗之魂3</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-hasuhasu"><h2 id="h2jscript" onclick="ShowHide('hasuhasu')"><strong id="eye-hasuhasu" style="color: #007962;">&#x25BC;</strong><strong>hasuhasu<span>( 1 )</span></strong></h2></div>
+<div id="hasuhasu" class="cards">
+<figure class="card">
+  <a href="884152e3-b93b-4591-a458-bc9dad7636ce.html">
+  <img class="lozad" data-src="884152e3-b93b-4591-a458-bc9dad7636ce/3452f054-ec8b-4718-8c0b-ea29c1ad8af6.jpg"/>
+  <figcaption>喵斯快跑</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Headup Games"><h2 id="h2jscript" onclick="ShowHide('Headup Games')"><strong id="eye-Headup Games" style="color: #007962;">&#x25BC;</strong><strong>Headup Games<span>( 1 )</span></strong></h2></div>
+<div id="Headup Games" class="cards">
+<figure class="card">
+  <a href="ce9f446d-12fb-4b8c-b338-63b112294fbf.html">
+  <img class="lozad" data-src="ce9f446d-12fb-4b8c-b338-63b112294fbf/2227c159-c328-4514-ace6-c0c0c001aae7.jpg"/>
+  <figcaption>泰拉瑞亚</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Hirameki"><h2 id="h2jscript" onclick="ShowHide('Hirameki')"><strong id="eye-Hirameki" style="color: #007962;">&#x25BC;</strong><strong>Hirameki<span>( 1 )</span></strong></h2></div>
+<div id="Hirameki" class="cards">
+<figure class="card">
+  <a href="09c69548-8b0e-41ed-8285-45085b39f26d.html">
+  <img class="lozad" data-src="09c69548-8b0e-41ed-8285-45085b39f26d/9416b2ee-97ea-4bf4-bb90-595d88b12e86.jpg"/>
+  <figcaption>时空轮回</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Hudson Soft"><h2 id="h2jscript" onclick="ShowHide('Hudson Soft')"><strong id="eye-Hudson Soft" style="color: #007962;">&#x25BC;</strong><strong>Hudson Soft<span>( 1 )</span></strong></h2></div>
+<div id="Hudson Soft" class="cards">
+<figure class="card">
+  <a href="755f188d-315f-452f-882d-a5defb45febe.html">
+  <img class="lozad" data-src="755f188d-315f-452f-882d-a5defb45febe/88b81147-a3cf-466a-8d90-daa34b1c5564.jpg"/>
+  <figcaption>冒险岛4</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-iam8bit"><h2 id="h2jscript" onclick="ShowHide('iam8bit')"><strong id="eye-iam8bit" style="color: #007962;">&#x25BC;</strong><strong>iam8bit<span>( 1 )</span></strong></h2></div>
+<div id="iam8bit" class="cards">
+<figure class="card">
+  <a href="fd87c847-4587-4047-8f51-44ddb2dfb9e0.html">
+  <img class="lozad" data-src="fd87c847-4587-4047-8f51-44ddb2dfb9e0/ef2efaa7-ff46-4b13-b6d8-6c1a0f13b709.jpg"/>
+  <figcaption>奥日2：精灵与萤火意志</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-iQue"><h2 id="h2jscript" onclick="ShowHide('iQue')"><strong id="eye-iQue" style="color: #007962;">&#x25BC;</strong><strong>iQue<span>( 5 )</span></strong></h2></div>
+<div id="iQue" class="cards">
+<figure class="card">
+  <a href="23fc026c-7a5e-49f9-9766-28d57ad11a1b.html">
+  <img class="lozad" data-src="23fc026c-7a5e-49f9-9766-28d57ad11a1b/ffbd4a78-7775-4bef-b780-b89d34c4a79e.jpg"/>
+  <figcaption>耀西岛</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="758ce9ea-5843-476f-89f0-06d68ac8a7dd.html">
+  <img class="lozad" data-src="758ce9ea-5843-476f-89f0-06d68ac8a7dd/0fbc7bfb-70e0-40a5-8fa5-741bcc23fe76.jpg"/>
+  <figcaption>银河战士：融合</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="e3caa021-d8a1-43aa-9896-8c513479f537.html">
+  <img class="lozad" data-src="e3caa021-d8a1-43aa-9896-8c513479f537/2e5045c4-c3fa-4565-8885-02a0bb57070e.jpg"/>
+  <figcaption>银河战士：零点任务</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="bf5c68b9-7ba4-4dd8-a159-855199445665.html">
+  <img class="lozad" data-src="bf5c68b9-7ba4-4dd8-a159-855199445665/646bcf1e-eed0-46b4-968b-ce68d6443d5c.jpg"/>
+  <figcaption>马里奥与路易基RPG</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="9e886d78-c154-466a-a09f-070e00433fbf.html">
+  <img class="lozad" data-src="9e886d78-c154-466a-a09f-070e00433fbf/fb9bfe3f-e4e6-4789-8cac-3c87c219926c.jpg"/>
+  <figcaption>高级战争</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Ironhide Game Studio"><h2 id="h2jscript" onclick="ShowHide('Ironhide Game Studio')"><strong id="eye-Ironhide Game Studio" style="color: #007962;">&#x25BC;</strong><strong>Ironhide Game Studio<span>( 1 )</span></strong></h2></div>
+<div id="Ironhide Game Studio" class="cards">
+<figure class="card">
+  <a href="976064d9-1fab-4fbd-8cd1-c57bc8093878.html">
+  <img class="lozad" data-src="976064d9-1fab-4fbd-8cd1-c57bc8093878/bea9810a-52ee-4e6b-82f1-3dc4446bf394.jpg"/>
+  <figcaption>王国保卫战</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-JSL ENTERTAINMENT"><h2 id="h2jscript" onclick="ShowHide('JSL ENTERTAINMENT')"><strong id="eye-JSL ENTERTAINMENT" style="color: #007962;">&#x25BC;</strong><strong>JSL ENTERTAINMENT<span>( 1 )</span></strong></h2></div>
+<div id="JSL ENTERTAINMENT" class="cards">
+<figure class="card">
+  <a href="1b178bbe-a8d7-420c-865c-63eb057e8c35.html">
+  <img class="lozad" data-src="1b178bbe-a8d7-420c-865c-63eb057e8c35/35162de6-ad52-4fdf-9e2b-2bb02cd6571b.jpg"/>
+  <figcaption>天命奇御</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-KID"><h2 id="h2jscript" onclick="ShowHide('KID')"><strong id="eye-KID" style="color: #007962;">&#x25BC;</strong><strong>KID<span>( 1 )</span></strong></h2></div>
+<div id="KID" class="cards">
+<figure class="card">
+  <a href="09c69548-8b0e-41ed-8285-45085b39f26d.html">
+  <img class="lozad" data-src="09c69548-8b0e-41ed-8285-45085b39f26d/9416b2ee-97ea-4bf4-bb90-595d88b12e86.jpg"/>
+  <figcaption>时空轮回</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Koei Tecmo Games"><h2 id="h2jscript" onclick="ShowHide('Koei Tecmo Games')"><strong id="eye-Koei Tecmo Games" style="color: #007962;">&#x25BC;</strong><strong>Koei Tecmo Games<span>( 1 )</span></strong></h2></div>
+<div id="Koei Tecmo Games" class="cards">
+<figure class="card">
+  <a href="854c1893-5516-4bfc-9d76-70106e54ef23.html">
+  <img class="lozad" data-src="854c1893-5516-4bfc-9d76-70106e54ef23/05d886b2-c27b-4052-aba8-de5aff8e0bfe.jpg"/>
+  <figcaption>仁王</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Konami"><h2 id="h2jscript" onclick="ShowHide('Konami')"><strong id="eye-Konami" style="color: #007962;">&#x25BC;</strong><strong>Konami<span>( 8 )</span></strong></h2></div>
+<div id="Konami" class="cards">
+<figure class="card">
+  <a href="07c4195c-7add-4ef3-bc5e-e3468282f3e6.html">
+  <img class="lozad" data-src="07c4195c-7add-4ef3-bc5e-e3468282f3e6/ac142ca5-3f8f-4d3e-93e2-8a14aa7b118b.jpg"/>
+  <figcaption>忍者神龟3</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="fa87b7bb-ca5a-405a-aedb-2d17be72389f.html">
+  <img class="lozad" data-src="fa87b7bb-ca5a-405a-aedb-2d17be72389f/b113e833-064b-4f44-9da5-6eac820425fa.jpg"/>
+  <figcaption>恶魔城：晓月圆舞曲</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="0b65d2c0-b8a2-43c5-ae81-0d45760224ed.html">
+  <img class="lozad" data-src="0b65d2c0-b8a2-43c5-ae81-0d45760224ed/aa12aa7a-21b9-42eb-aa53-6ba792f76912.jpg"/>
+  <figcaption>恶魔城：暗影之王</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="97d6a621-9e99-40fc-a696-951e878d233e.html">
+  <img class="lozad" data-src="97d6a621-9e99-40fc-a696-951e878d233e/681e6973-d0ca-4151-a223-4038f7e4e269.jpg"/>
+  <figcaption>恶魔城：暗影之王2</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="0e93e65e-0e7f-486b-bfdc-ef978b91cfef.html">
+  <img class="lozad" data-src="0e93e65e-0e7f-486b-bfdc-ef978b91cfef/0194769c-5db0-41f1-a7a7-cb0976746721.jpg"/>
+  <figcaption>恶魔城：月下夜想曲</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="787505be-9e8b-42f4-91eb-3c86e49bde5b.html">
+  <img class="lozad" data-src="787505be-9e8b-42f4-91eb-3c86e49bde5b/9e5de92e-a756-4aca-b5e9-025427232af2.jpg"/>
+  <figcaption>恶魔城：白夜协奏曲</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="35f8f3f6-9363-4de8-a81a-75a23bce0336.html">
+  <img class="lozad" data-src="35f8f3f6-9363-4de8-a81a-75a23bce0336/c20ba3f5-fb16-4f5c-a048-5f2a3b51dfbb.jpg"/>
+  <figcaption>恶魔城：被夺走的刻印</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="89e36603-51f2-4652-a9e6-79b8daed24df.html">
+  <img class="lozad" data-src="89e36603-51f2-4652-a9e6-79b8daed24df/26265d2d-9f98-4af9-bf1c-af5b44310316.jpg"/>
+  <figcaption>游戏王：世界冠军2004</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Kumobius"><h2 id="h2jscript" onclick="ShowHide('Kumobius')"><strong id="eye-Kumobius" style="color: #007962;">&#x25BC;</strong><strong>Kumobius<span>( 1 )</span></strong></h2></div>
+<div id="Kumobius" class="cards">
+<figure class="card">
+  <a href="054ae868-5a45-4ea4-9165-8a96eae109b4.html">
+  <img class="lozad" data-src="054ae868-5a45-4ea4-9165-8a96eae109b4/ef4e2355-e75b-4b5b-ad76-2c3754def6aa.jpg"/>
+  <figcaption>二重奏</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Larian Studios"><h2 id="h2jscript" onclick="ShowHide('Larian Studios')"><strong id="eye-Larian Studios" style="color: #007962;">&#x25BC;</strong><strong>Larian Studios<span>( 1 )</span></strong></h2></div>
+<div id="Larian Studios" class="cards">
+<figure class="card">
+  <a href="03d62d5b-5c4b-44e8-9f55-b9eb658d4c7d.html">
+  <img class="lozad" data-src="03d62d5b-5c4b-44e8-9f55-b9eb658d4c7d/1d79bdce-aaee-4de0-95d7-8843f391f858.jpg"/>
+  <figcaption>神界：原罪2</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Maddy Makes Games"><h2 id="h2jscript" onclick="ShowHide('Maddy Makes Games')"><strong id="eye-Maddy Makes Games" style="color: #007962;">&#x25BC;</strong><strong>Maddy Makes Games<span>( 1 )</span></strong></h2></div>
+<div id="Maddy Makes Games" class="cards">
+<figure class="card">
+  <a href="e4e4000e-4bd5-4744-b3bb-3cad552be525.html">
+  <img class="lozad" data-src="e4e4000e-4bd5-4744-b3bb-3cad552be525/523cf6b5-a244-4377-80d7-e5417bd4358c.jpg"/>
+  <figcaption>蔚蓝</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Microsoft Game Studios"><h2 id="h2jscript" onclick="ShowHide('Microsoft Game Studios')"><strong id="eye-Microsoft Game Studios" style="color: #007962;">&#x25BC;</strong><strong>Microsoft Game Studios<span>( 2 )</span></strong></h2></div>
+<div id="Microsoft Game Studios" class="cards">
+<figure class="card">
+  <a href="6f6442b1-0dc9-4f73-a706-c60c8dd3b3fe.html">
+  <img class="lozad" data-src="6f6442b1-0dc9-4f73-a706-c60c8dd3b3fe/30e6fe9d-ccab-4acd-9662-dee49cbf4f44.jpg"/>
+  <figcaption>地狱边境</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="56f68a6c-a71a-480d-95eb-9bb2453a2862.html">
+  <img class="lozad" data-src="56f68a6c-a71a-480d-95eb-9bb2453a2862/fedde3a9-b637-45c8-845e-1b3b66d8ad88.jpg"/>
+  <figcaption>时空幻境</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Microsoft Studios"><h2 id="h2jscript" onclick="ShowHide('Microsoft Studios')"><strong id="eye-Microsoft Studios" style="color: #007962;">&#x25BC;</strong><strong>Microsoft Studios<span>( 1 )</span></strong></h2></div>
+<div id="Microsoft Studios" class="cards">
+<figure class="card">
+  <a href="63876903-f1e1-4471-90e3-79f81004e003.html">
+  <img class="lozad" data-src="63876903-f1e1-4471-90e3-79f81004e003/1080ab6a-2e7a-4612-8b60-d71268200765.jpg"/>
+  <figcaption>万智牌2015</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Mojang Studios"><h2 id="h2jscript" onclick="ShowHide('Mojang Studios')"><strong id="eye-Mojang Studios" style="color: #007962;">&#x25BC;</strong><strong>Mojang Studios<span>( 1 )</span></strong></h2></div>
+<div id="Mojang Studios" class="cards">
+<figure class="card">
+  <a href="264acc2c-7944-42c8-ab5c-43aabf5f9b83.html">
+  <img class="lozad" data-src="264acc2c-7944-42c8-ab5c-43aabf5f9b83/1de6abcb-f880-4205-8a6d-8dda5f78b295.jpg"/>
+  <figcaption>我的世界</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Motion Twin"><h2 id="h2jscript" onclick="ShowHide('Motion Twin')"><strong id="eye-Motion Twin" style="color: #007962;">&#x25BC;</strong><strong>Motion Twin<span>( 1 )</span></strong></h2></div>
+<div id="Motion Twin" class="cards">
+<figure class="card">
+  <a href="15db5480-b49b-4e8a-b25d-74782b977ac6.html">
+  <img class="lozad" data-src="15db5480-b49b-4e8a-b25d-74782b977ac6/e4e39e4d-4dfb-4882-a7e3-c6f79ba7ae5b.jpg"/>
+  <figcaption>死亡细胞</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Namco"><h2 id="h2jscript" onclick="ShowHide('Namco')"><strong id="eye-Namco" style="color: #007962;">&#x25BC;</strong><strong>Namco<span>( 1 )</span></strong></h2></div>
+<div id="Namco" class="cards">
+<figure class="card">
+  <a href="54d33f81-b1b9-46d3-835a-5e46dad47fc3.html">
+  <img class="lozad" data-src="54d33f81-b1b9-46d3-835a-5e46dad47fc3/942d433b-52ee-42bb-a108-7e52d6b0471c.jpg"/>
+  <figcaption>风之少年：梦之帝国</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Nicalis, Inc."><h2 id="h2jscript" onclick="ShowHide('Nicalis, Inc.')"><strong id="eye-Nicalis, Inc." style="color: #007962;">&#x25BC;</strong><strong>Nicalis, Inc.<span>( 1 )</span></strong></h2></div>
+<div id="Nicalis, Inc." class="cards">
+<figure class="card">
+  <a href="41757a9e-d070-4347-a324-0f3ed86ad186.html">
+  <img class="lozad" data-src="41757a9e-d070-4347-a324-0f3ed86ad186/10ac7723-5268-4d48-b04c-2c0ae1afc317.jpg"/>
+  <figcaption>红视：增强版</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Nintendo"><h2 id="h2jscript" onclick="ShowHide('Nintendo')"><strong id="eye-Nintendo" style="color: #007962;">&#x25BC;</strong><strong>Nintendo<span>( 14 )</span></strong></h2></div>
+<div id="Nintendo" class="cards">
+<figure class="card">
+  <a href="d7d7b5cc-b080-47b3-a9e3-886ba518d390.html">
+  <img class="lozad" data-src="d7d7b5cc-b080-47b3-a9e3-886ba518d390/5d3c407d-0c62-444c-861c-d59ff4d99a57.jpg"/>
+  <figcaption>口袋妖怪：火红</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="e8bb8aa0-70cc-437e-9e3b-cea1e73cf1c0.html">
+  <img class="lozad" data-src="e8bb8aa0-70cc-437e-9e3b-cea1e73cf1c0/072854c4-5c61-4004-8d6e-24dc2a9929dc.jpg"/>
+  <figcaption>口袋妖怪：绿宝石</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="089b1a7d-0e34-4783-a019-777c49249be4.html">
+  <img class="lozad" data-src="089b1a7d-0e34-4783-a019-777c49249be4/fa40cae3-942e-4d1a-a45d-245008fb793a.jpg"/>
+  <figcaption>地球冒险3</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="db8f5d10-4679-40cf-a8d7-4264d1ac8d00.html">
+  <img class="lozad" data-src="db8f5d10-4679-40cf-a8d7-4264d1ac8d00/ee983b25-3a48-424f-a104-ccc95b47946f.jpg"/>
+  <figcaption>最终幻想：战略版Advance</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="d411f261-80ca-47c7-843c-d718ca5b1b71.html">
+  <img class="lozad" data-src="d411f261-80ca-47c7-843c-d718ca5b1b71/c4f6e82a-fafc-4b80-9e61-a0a71b076406.jpg"/>
+  <figcaption>火焰之纹章：圣魔之光石</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="23fc026c-7a5e-49f9-9766-28d57ad11a1b.html">
+  <img class="lozad" data-src="23fc026c-7a5e-49f9-9766-28d57ad11a1b/ffbd4a78-7775-4bef-b780-b89d34c4a79e.jpg"/>
+  <figcaption>耀西岛</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="e36a08a5-595d-4b1f-88f7-85482a1e8fc3.html">
+  <img class="lozad" data-src="e36a08a5-595d-4b1f-88f7-85482a1e8fc3/b419c01e-d961-462f-93ed-7401c0ae2da4.jpg"/>
+  <figcaption>逆转裁判1</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="d4dda4f0-629e-468b-931c-395886f93817.html">
+  <img class="lozad" data-src="d4dda4f0-629e-468b-931c-395886f93817/9a556f76-8a69-4780-a525-a3f28c76df4b.jpg"/>
+  <figcaption>银河战士：生存恐惧</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="758ce9ea-5843-476f-89f0-06d68ac8a7dd.html">
+  <img class="lozad" data-src="758ce9ea-5843-476f-89f0-06d68ac8a7dd/0fbc7bfb-70e0-40a5-8fa5-741bcc23fe76.jpg"/>
+  <figcaption>银河战士：融合</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="e3caa021-d8a1-43aa-9896-8c513479f537.html">
+  <img class="lozad" data-src="e3caa021-d8a1-43aa-9896-8c513479f537/2e5045c4-c3fa-4565-8885-02a0bb57070e.jpg"/>
+  <figcaption>银河战士：零点任务</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="5b63c9bc-6d82-40f1-9282-c3ee96592818.html">
+  <img class="lozad" data-src="5b63c9bc-6d82-40f1-9282-c3ee96592818/80527f36-7693-43f2-9271-017e59345153.jpg"/>
+  <figcaption>银河战士究极复刻版</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="bf5c68b9-7ba4-4dd8-a159-855199445665.html">
+  <img class="lozad" data-src="bf5c68b9-7ba4-4dd8-a159-855199445665/646bcf1e-eed0-46b4-968b-ce68d6443d5c.jpg"/>
+  <figcaption>马里奥与路易基RPG</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="b76bd32d-e64f-44b8-902f-d1f28f5a0fbf.html">
+  <img class="lozad" data-src="b76bd32d-e64f-44b8-902f-d1f28f5a0fbf/971ad38d-472d-4033-be04-5b6be5ec3a53.jpg"/>
+  <figcaption>马里奥赛车</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="9e886d78-c154-466a-a09f-070e00433fbf.html">
+  <img class="lozad" data-src="9e886d78-c154-466a-a09f-070e00433fbf/fb9bfe3f-e4e6-4789-8cac-3c87c219926c.jpg"/>
+  <figcaption>高级战争</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Number None Inc."><h2 id="h2jscript" onclick="ShowHide('Number None Inc.')"><strong id="eye-Number None Inc." style="color: #007962;">&#x25BC;</strong><strong>Number None Inc.<span>( 1 )</span></strong></h2></div>
+<div id="Number None Inc." class="cards">
+<figure class="card">
+  <a href="56f68a6c-a71a-480d-95eb-9bb2453a2862.html">
+  <img class="lozad" data-src="56f68a6c-a71a-480d-95eb-9bb2453a2862/fedde3a9-b637-45c8-845e-1b3b66d8ad88.jpg"/>
+  <figcaption>时空幻境</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Playdead"><h2 id="h2jscript" onclick="ShowHide('Playdead')"><strong id="eye-Playdead" style="color: #007962;">&#x25BC;</strong><strong>Playdead<span>( 2 )</span></strong></h2></div>
+<div id="Playdead" class="cards">
+<figure class="card">
+  <a href="c7703d1d-98d7-44fa-bb07-789293259ba9.html">
+  <img class="lozad" data-src="c7703d1d-98d7-44fa-bb07-789293259ba9/137a0208-b27c-4ff7-b767-fe0882fc745d.jpg"/>
+  <figcaption>Inside</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="6f6442b1-0dc9-4f73-a706-c60c8dd3b3fe.html">
+  <img class="lozad" data-src="6f6442b1-0dc9-4f73-a706-c60c8dd3b3fe/30e6fe9d-ccab-4acd-9662-dee49cbf4f44.jpg"/>
+  <figcaption>地狱边境</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Playdigious"><h2 id="h2jscript" onclick="ShowHide('Playdigious')"><strong id="eye-Playdigious" style="color: #007962;">&#x25BC;</strong><strong>Playdigious<span>( 1 )</span></strong></h2></div>
+<div id="Playdigious" class="cards">
+<figure class="card">
+  <a href="328f1fac-d3fa-4371-8270-b8e55f5d9eda.html">
+  <img class="lozad" data-src="328f1fac-d3fa-4371-8270-b8e55f5d9eda/6dc3777d-a6b0-406e-ba89-ae5639363afa.jpg"/>
+  <figcaption>进化之地</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Playtronic"><h2 id="h2jscript" onclick="ShowHide('Playtronic')"><strong id="eye-Playtronic" style="color: #007962;">&#x25BC;</strong><strong>Playtronic<span>( 1 )</span></strong></h2></div>
+<div id="Playtronic" class="cards">
+<figure class="card">
+  <a href="07c4195c-7add-4ef3-bc5e-e3468282f3e6.html">
+  <img class="lozad" data-src="07c4195c-7add-4ef3-bc5e-e3468282f3e6/ac142ca5-3f8f-4d3e-93e2-8a14aa7b118b.jpg"/>
+  <figcaption>忍者神龟3</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Quest"><h2 id="h2jscript" onclick="ShowHide('Quest')"><strong id="eye-Quest" style="color: #007962;">&#x25BC;</strong><strong>Quest<span>( 1 )</span></strong></h2></div>
+<div id="Quest" class="cards">
+<figure class="card">
+  <a href="ec3e0df7-b2e4-4f39-844f-372f56597305.html">
+  <img class="lozad" data-src="ec3e0df7-b2e4-4f39-844f-372f56597305/af5c16be-f58b-4f77-932e-9ead330439a3.jpg"/>
+  <figcaption>皇家骑士团：命运之轮</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Rage Software"><h2 id="h2jscript" onclick="ShowHide('Rage Software')"><strong id="eye-Rage Software" style="color: #007962;">&#x25BC;</strong><strong>Rage Software<span>( 1 )</span></strong></h2></div>
+<div id="Rage Software" class="cards">
+<figure class="card">
+  <a href="ef1eab88-e61b-4ca9-b27a-c6dbc7155469.html">
+  <img class="lozad" data-src="ef1eab88-e61b-4ca9-b27a-c6dbc7155469/15d2b60f-9223-489b-954e-8fc6476ae5c7.jpg"/>
+  <figcaption>贝克汉姆足球岛</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Raw Fury Games"><h2 id="h2jscript" onclick="ShowHide('Raw Fury Games')"><strong id="eye-Raw Fury Games" style="color: #007962;">&#x25BC;</strong><strong>Raw Fury Games<span>( 1 )</span></strong></h2></div>
+<div id="Raw Fury Games" class="cards">
+<figure class="card">
+  <a href="afad32e6-eed2-4340-b017-3a7634b7b0b0.html">
+  <img class="lozad" data-src="afad32e6-eed2-4340-b017-3a7634b7b0b0/9b3c2d12-1f4d-4657-8420-48a18a263117.jpg"/>
+  <figcaption>王国</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Re-Logic"><h2 id="h2jscript" onclick="ShowHide('Re-Logic')"><strong id="eye-Re-Logic" style="color: #007962;">&#x25BC;</strong><strong>Re-Logic<span>( 1 )</span></strong></h2></div>
+<div id="Re-Logic" class="cards">
+<figure class="card">
+  <a href="ce9f446d-12fb-4b8c-b338-63b112294fbf.html">
+  <img class="lozad" data-src="ce9f446d-12fb-4b8c-b338-63b112294fbf/2227c159-c328-4514-ace6-c0c0c001aae7.jpg"/>
+  <figcaption>泰拉瑞亚</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-RewindApp"><h2 id="h2jscript" onclick="ShowHide('RewindApp')"><strong id="eye-RewindApp" style="color: #007962;">&#x25BC;</strong><strong>RewindApp<span>( 1 )</span></strong></h2></div>
+<div id="RewindApp" class="cards">
+<figure class="card">
+  <a href="504facd1-f282-4dae-9bdd-6efae86af9a3.html">
+  <img class="lozad" data-src="504facd1-f282-4dae-9bdd-6efae86af9a3/9749b89d-b320-4ea9-85e7-c72179f0d60d.jpg"/>
+  <figcaption>漂移86</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Rising Star Games"><h2 id="h2jscript" onclick="ShowHide('Rising Star Games')"><strong id="eye-Rising Star Games" style="color: #007962;">&#x25BC;</strong><strong>Rising Star Games<span>( 1 )</span></strong></h2></div>
+<div id="Rising Star Games" class="cards">
+<figure class="card">
+  <a href="b2d13a77-1cf3-432a-bbdd-b2180cdbb5ce.html">
+  <img class="lozad" data-src="b2d13a77-1cf3-432a-bbdd-b2180cdbb5ce/d8dbe6e4-2c15-495d-894d-faaa82546ffa.jpg"/>
+  <figcaption>拳皇13</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Riverhillsoft"><h2 id="h2jscript" onclick="ShowHide('Riverhillsoft')"><strong id="eye-Riverhillsoft" style="color: #007962;">&#x25BC;</strong><strong>Riverhillsoft<span>( 1 )</span></strong></h2></div>
+<div id="Riverhillsoft" class="cards">
+<figure class="card">
+  <a href="ec3e0df7-b2e4-4f39-844f-372f56597305.html">
+  <img class="lozad" data-src="ec3e0df7-b2e4-4f39-844f-372f56597305/af5c16be-f58b-4f77-932e-9ead330439a3.jpg"/>
+  <figcaption>皇家骑士团：命运之轮</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Rockstar Games"><h2 id="h2jscript" onclick="ShowHide('Rockstar Games')"><strong id="eye-Rockstar Games" style="color: #007962;">&#x25BC;</strong><strong>Rockstar Games<span>( 1 )</span></strong></h2></div>
+<div id="Rockstar Games" class="cards">
+<figure class="card">
+  <a href="954d25a6-1801-4fb7-ad3b-f73158535320.html">
+  <img class="lozad" data-src="954d25a6-1801-4fb7-ad3b-f73158535320/f94279ca-b0e5-4baf-9569-3b58c8bee7df.jpg"/>
+  <figcaption>侠盗猎车5</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Runic Games"><h2 id="h2jscript" onclick="ShowHide('Runic Games')"><strong id="eye-Runic Games" style="color: #007962;">&#x25BC;</strong><strong>Runic Games<span>( 1 )</span></strong></h2></div>
+<div id="Runic Games" class="cards">
+<figure class="card">
+  <a href="4a34ad90-1596-4576-8682-de13c5dd20af.html">
+  <img class="lozad" data-src="4a34ad90-1596-4576-8682-de13c5dd20af/b9106a94-38fc-4f86-b327-7a0cb4035f3a.jpg"/>
+  <figcaption>火炬之光2</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Sega"><h2 id="h2jscript" onclick="ShowHide('Sega')"><strong id="eye-Sega" style="color: #007962;">&#x25BC;</strong><strong>Sega<span>( 1 )</span></strong></h2></div>
+<div id="Sega" class="cards">
+<figure class="card">
+  <a href="788b93b0-3bf6-4a83-99ad-1183240c76ed.html">
+  <img class="lozad" data-src="788b93b0-3bf6-4a83-99ad-1183240c76ed/5f7707af-f5ee-46d0-a2ca-20a83b56873e.jpg"/>
+  <figcaption>人中之龙0：誓约的场所</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Shiro Games"><h2 id="h2jscript" onclick="ShowHide('Shiro Games')"><strong id="eye-Shiro Games" style="color: #007962;">&#x25BC;</strong><strong>Shiro Games<span>( 1 )</span></strong></h2></div>
+<div id="Shiro Games" class="cards">
+<figure class="card">
+  <a href="328f1fac-d3fa-4371-8270-b8e55f5d9eda.html">
+  <img class="lozad" data-src="328f1fac-d3fa-4371-8270-b8e55f5d9eda/6dc3777d-a6b0-406e-ba89-ae5639363afa.jpg"/>
+  <figcaption>进化之地</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Ska Studios"><h2 id="h2jscript" onclick="ShowHide('Ska Studios')"><strong id="eye-Ska Studios" style="color: #007962;">&#x25BC;</strong><strong>Ska Studios<span>( 1 )</span></strong></h2></div>
+<div id="Ska Studios" class="cards">
+<figure class="card">
+  <a href="9777c665-456e-4a95-ba66-fa8d211b13a8.html">
+  <img class="lozad" data-src="9777c665-456e-4a95-ba66-fa8d211b13a8/eb73525e-6ea0-4198-8932-498974e88d64.jpg"/>
+  <figcaption>盐与避难所</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-SNK Playmore"><h2 id="h2jscript" onclick="ShowHide('SNK Playmore')"><strong id="eye-SNK Playmore" style="color: #007962;">&#x25BC;</strong><strong>SNK Playmore<span>( 1 )</span></strong></h2></div>
+<div id="SNK Playmore" class="cards">
+<figure class="card">
+  <a href="b2d13a77-1cf3-432a-bbdd-b2180cdbb5ce.html">
+  <img class="lozad" data-src="b2d13a77-1cf3-432a-bbdd-b2180cdbb5ce/d8dbe6e4-2c15-495d-894d-faaa82546ffa.jpg"/>
+  <figcaption>拳皇13</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Sony Interactive Entertainment"><h2 id="h2jscript" onclick="ShowHide('Sony Interactive Entertainment')"><strong id="eye-Sony Interactive Entertainment" style="color: #007962;">&#x25BC;</strong><strong>Sony Interactive Entertainment<span>( 1 )</span></strong></h2></div>
+<div id="Sony Interactive Entertainment" class="cards">
+<figure class="card">
+  <a href="854c1893-5516-4bfc-9d76-70106e54ef23.html">
+  <img class="lozad" data-src="854c1893-5516-4bfc-9d76-70106e54ef23/05d886b2-c27b-4052-aba8-de5aff8e0bfe.jpg"/>
+  <figcaption>仁王</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Spike"><h2 id="h2jscript" onclick="ShowHide('Spike')"><strong id="eye-Spike" style="color: #007962;">&#x25BC;</strong><strong>Spike<span>( 1 )</span></strong></h2></div>
+<div id="Spike" class="cards">
+<figure class="card">
+  <a href="75ffcc07-d874-492a-bbb6-f5546034a506.html">
+  <img class="lozad" data-src="75ffcc07-d874-492a-bbb6-f5546034a506/99ade8fa-f13e-4306-815a-e952d5ad71ec.jpg"/>
+  <figcaption>999极限脱出</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Spike ChunSoft"><h2 id="h2jscript" onclick="ShowHide('Spike ChunSoft')"><strong id="eye-Spike ChunSoft" style="color: #007962;">&#x25BC;</strong><strong>Spike ChunSoft<span>( 2 )</span></strong></h2></div>
+<div id="Spike ChunSoft" class="cards">
+<figure class="card">
+  <a href="63daf752-b470-4b09-ac51-e214ce82cb27.html">
+  <img class="lozad" data-src="63daf752-b470-4b09-ac51-e214ce82cb27/214b4269-c772-4bf6-b1aa-3554c5adae8e.jpg"/>
+  <figcaption>墨西哥英雄大混战</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="dd434e24-593d-42ca-8ce7-d291ffeb8fc0.html">
+  <img class="lozad" data-src="dd434e24-593d-42ca-8ce7-d291ffeb8fc0/fdfb4d2f-d405-4281-b991-baf2a97480c9.jpg"/>
+  <figcaption>巫师3：狂猎</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Square Enix"><h2 id="h2jscript" onclick="ShowHide('Square Enix')"><strong id="eye-Square Enix" style="color: #007962;">&#x25BC;</strong><strong>Square Enix<span>( 3 )</span></strong></h2></div>
+<div id="Square Enix" class="cards">
+<figure class="card">
+  <a href="ae8c59be-d43d-4e41-8cdc-c41ec838e172.html">
+  <img class="lozad" data-src="ae8c59be-d43d-4e41-8cdc-c41ec838e172/c7b2caea-6518-462c-a46e-632ecf4829fd.jpg"/>
+  <figcaption>最终幻想：战略版A2</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="db8f5d10-4679-40cf-a8d7-4264d1ac8d00.html">
+  <img class="lozad" data-src="db8f5d10-4679-40cf-a8d7-4264d1ac8d00/ee983b25-3a48-424f-a104-ccc95b47946f.jpg"/>
+  <figcaption>最终幻想：战略版Advance</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="ec3e0df7-b2e4-4f39-844f-372f56597305.html">
+  <img class="lozad" data-src="ec3e0df7-b2e4-4f39-844f-372f56597305/af5c16be-f58b-4f77-932e-9ead330439a3.jpg"/>
+  <figcaption>皇家骑士团：命运之轮</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Success Corporation"><h2 id="h2jscript" onclick="ShowHide('Success Corporation')"><strong id="eye-Success Corporation" style="color: #007962;">&#x25BC;</strong><strong>Success Corporation<span>( 1 )</span></strong></h2></div>
+<div id="Success Corporation" class="cards">
+<figure class="card">
+  <a href="09c69548-8b0e-41ed-8285-45085b39f26d.html">
+  <img class="lozad" data-src="09c69548-8b0e-41ed-8285-45085b39f26d/9416b2ee-97ea-4bf4-bb90-595d88b12e86.jpg"/>
+  <figcaption>时空轮回</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Supergiant Games"><h2 id="h2jscript" onclick="ShowHide('Supergiant Games')"><strong id="eye-Supergiant Games" style="color: #007962;">&#x25BC;</strong><strong>Supergiant Games<span>( 1 )</span></strong></h2></div>
+<div id="Supergiant Games" class="cards">
+<figure class="card">
+  <a href="8f42c9eb-bcb3-432b-b25b-9cf82b69fabb.html">
+  <img class="lozad" data-src="8f42c9eb-bcb3-432b-b25b-9cf82b69fabb/9aacdac5-2c12-4a05-8f4b-643bf1ff5e5a.jpg"/>
+  <figcaption>晶体管</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Take-Two Interactive"><h2 id="h2jscript" onclick="ShowHide('Take-Two Interactive')"><strong id="eye-Take-Two Interactive" style="color: #007962;">&#x25BC;</strong><strong>Take-Two Interactive<span>( 1 )</span></strong></h2></div>
+<div id="Take-Two Interactive" class="cards">
+<figure class="card">
+  <a href="954d25a6-1801-4fb7-ad3b-f73158535320.html">
+  <img class="lozad" data-src="954d25a6-1801-4fb7-ad3b-f73158535320/f94279ca-b0e5-4baf-9569-3b58c8bee7df.jpg"/>
+  <figcaption>侠盗猎车5</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Team Cherry"><h2 id="h2jscript" onclick="ShowHide('Team Cherry')"><strong id="eye-Team Cherry" style="color: #007962;">&#x25BC;</strong><strong>Team Cherry<span>( 1 )</span></strong></h2></div>
+<div id="Team Cherry" class="cards">
+<figure class="card">
+  <a href="c09f44b7-8902-4049-be51-4992cce1e17a.html">
+  <img class="lozad" data-src="c09f44b7-8902-4049-be51-4992cce1e17a/544431dd-9af9-43f2-a3d4-218fa8df5adb.jpg"/>
+  <figcaption>空洞骑士</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Technos Japan"><h2 id="h2jscript" onclick="ShowHide('Technos Japan')"><strong id="eye-Technos Japan" style="color: #007962;">&#x25BC;</strong><strong>Technos Japan<span>( 2 )</span></strong></h2></div>
+<div id="Technos Japan" class="cards">
+<figure class="card">
+  <a href="96cb21dc-5dde-4650-8724-5eac64dca99d.html">
+  <img class="lozad" data-src="96cb21dc-5dde-4650-8724-5eac64dca99d/0cd03dad-38db-4b87-bcf8-14192839bd5e.jpg"/>
+  <figcaption>热血格斗传说</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="1771d1d4-5cbf-4e29-b072-79f2626074ee.html">
+  <img class="lozad" data-src="1771d1d4-5cbf-4e29-b072-79f2626074ee/9df5c009-9e83-4fb5-8556-c865eba5418e.jpg"/>
+  <figcaption>热血足球</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Thomas Happ Games"><h2 id="h2jscript" onclick="ShowHide('Thomas Happ Games')"><strong id="eye-Thomas Happ Games" style="color: #007962;">&#x25BC;</strong><strong>Thomas Happ Games<span>( 1 )</span></strong></h2></div>
+<div id="Thomas Happ Games" class="cards">
+<figure class="card">
+  <a href="1c05d4dd-d365-4548-98f7-3f0ec591a447.html">
+  <img class="lozad" data-src="1c05d4dd-d365-4548-98f7-3f0ec591a447/a5f2becf-7543-4d3d-aa2c-d73c4f358720.jpg"/>
+  <figcaption>公理边缘</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Tomy"><h2 id="h2jscript" onclick="ShowHide('Tomy')"><strong id="eye-Tomy" style="color: #007962;">&#x25BC;</strong><strong>Tomy<span>( 1 )</span></strong></h2></div>
+<div id="Tomy" class="cards">
+<figure class="card">
+  <a href="c543af3f-be03-49d0-a29a-c9f157d73816.html">
+  <img class="lozad" data-src="c543af3f-be03-49d0-a29a-c9f157d73816/1aadbd15-59e4-470d-9973-93a498d73669.jpg"/>
+  <figcaption>火影忍者：木叶战记</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Ubisoft Entertainment"><h2 id="h2jscript" onclick="ShowHide('Ubisoft Entertainment')"><strong id="eye-Ubisoft Entertainment" style="color: #007962;">&#x25BC;</strong><strong>Ubisoft Entertainment<span>( 3 )</span></strong></h2></div>
+<div id="Ubisoft Entertainment" class="cards">
+<figure class="card">
+  <a href="a094f12f-351e-4fd6-87b2-631e073ea19b.html">
+  <img class="lozad" data-src="a094f12f-351e-4fd6-87b2-631e073ea19b/342b1ea5-f0cb-4e67-a05d-156d2e3adf0b.jpg"/>
+  <figcaption>刺客信条2</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="fcb223fb-416e-403b-83d1-f35207f015e9.html">
+  <img class="lozad" data-src="fcb223fb-416e-403b-83d1-f35207f015e9/60dfe0a9-e55b-47af-8a38-a9f13527a271.jpg"/>
+  <figcaption>刺客信条2：兄弟会</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="3366e60e-fa23-4e3f-93a8-580387da5ef9.html">
+  <img class="lozad" data-src="3366e60e-fa23-4e3f-93a8-580387da5ef9/fd0404dc-2364-4428-b9f2-daa5e8a87766.jpg"/>
+  <figcaption>刺客信条2：启示录</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-WB Games"><h2 id="h2jscript" onclick="ShowHide('WB Games')"><strong id="eye-WB Games" style="color: #007962;">&#x25BC;</strong><strong>WB Games<span>( 1 )</span></strong></h2></div>
+<div id="WB Games" class="cards">
+<figure class="card">
+  <a href="dd434e24-593d-42ca-8ce7-d291ffeb8fc0.html">
+  <img class="lozad" data-src="dd434e24-593d-42ca-8ce7-d291ffeb8fc0/fdfb4d2f-d405-4281-b991-baf2a97480c9.jpg"/>
+  <figcaption>巫师3：狂猎</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-WindySoft"><h2 id="h2jscript" onclick="ShowHide('WindySoft')"><strong id="eye-WindySoft" style="color: #007962;">&#x25BC;</strong><strong>WindySoft<span>( 1 )</span></strong></h2></div>
+<div id="WindySoft" class="cards">
+<figure class="card">
+  <a href="1771d1d4-5cbf-4e29-b072-79f2626074ee.html">
+  <img class="lozad" data-src="1771d1d4-5cbf-4e29-b072-79f2626074ee/9df5c009-9e83-4fb5-8556-c865eba5418e.jpg"/>
+  <figcaption>热血足球</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Wizards of the Coast LLC"><h2 id="h2jscript" onclick="ShowHide('Wizards of the Coast LLC')"><strong id="eye-Wizards of the Coast LLC" style="color: #007962;">&#x25BC;</strong><strong>Wizards of the Coast LLC<span>( 1 )</span></strong></h2></div>
+<div id="Wizards of the Coast LLC" class="cards">
+<figure class="card">
+  <a href="63876903-f1e1-4471-90e3-79f81004e003.html">
+  <img class="lozad" data-src="63876903-f1e1-4471-90e3-79f81004e003/1080ab6a-2e7a-4612-8b60-d71268200765.jpg"/>
+  <figcaption>万智牌2015</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-X.D. Network Inc."><h2 id="h2jscript" onclick="ShowHide('X.D. Network Inc.')"><strong id="eye-X.D. Network Inc." style="color: #007962;">&#x25BC;</strong><strong>X.D. Network Inc.<span>( 2 )</span></strong></h2></div>
+<div id="X.D. Network Inc." class="cards">
+<figure class="card">
+  <a href="77c50b0d-1a03-49ab-8ab0-7f7bbdb882ce.html">
+  <img class="lozad" data-src="77c50b0d-1a03-49ab-8ab0-7f7bbdb882ce/0899e1b6-2db1-46cf-a77c-c2f496883043.jpg"/>
+  <figcaption>去月球</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="884152e3-b93b-4591-a458-bc9dad7636ce.html">
+  <img class="lozad" data-src="884152e3-b93b-4591-a458-bc9dad7636ce/3452f054-ec8b-4718-8c0b-ea29c1ad8af6.jpg"/>
+  <figcaption>喵斯快跑</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Xbox Game Studios"><h2 id="h2jscript" onclick="ShowHide('Xbox Game Studios')"><strong id="eye-Xbox Game Studios" style="color: #007962;">&#x25BC;</strong><strong>Xbox Game Studios<span>( 1 )</span></strong></h2></div>
+<div id="Xbox Game Studios" class="cards">
+<figure class="card">
+  <a href="fd87c847-4587-4047-8f51-44ddb2dfb9e0.html">
+  <img class="lozad" data-src="fd87c847-4587-4047-8f51-44ddb2dfb9e0/ef2efaa7-ff46-4b13-b6d8-6c1a0f13b709.jpg"/>
+  <figcaption>奥日2：精灵与萤火意志</figcaption>
+  </a>
+</figure>
+
+</div>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+  <script>
+    const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+    observer.observe();
+    
+	// Get the input field
+	var input = document.getElementById("search");
+
+	// Execute a function when the user releases a key on the keyboard
+	input.addEventListener("keyup", function(event) {
+	  // Number 13 is the "Enter" key on the keyboard
+	  if (event.keyCode === 13) {
+		// Cancel the default action, if needed
+		event.preventDefault();
+		// Trigger the button element with a click
+		document.getElementById("searchbutton").click();
+	  }
+	});
+	
+    //Get the button:
+    mybutton = document.getElementById("BackTopButton");
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+	
+	function ShowHide(body_id){
+	var elem
+
+		elem = document.getElementById(body_id);
+		elemclick = document.getElementById("eye-" + body_id);
+		
+		if(!elem) return true;
+		if(!elemclick) return true;
+
+		if (elem.style.display == "none") {
+		  elem.style.display = "";
+		  elemclick.innerHTML = "&#x25BC;";
+		  elemclick.style.color = "#007962";
+		}
+		else {
+		  elem.style.display = "none";
+		  elemclick.innerHTML = "&#x25BA;";
+		  elemclick.style.color = "#790000";
+		}
+		return true;
+	}
+   </script>
+</html>

@@ -1,0 +1,1195 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Serie</title>
+    <link rel="manifest" href="manifest.webmanifest">
+	<meta name="viewport" content="width=device-width, initial-scale=0.5">
+	<style>
+h2:after,
+.cards .card figcaption,
+.cards .card:after {
+  position: absolute;
+}
+
+h2,
+h2 strong,
+.cards .card
+{
+  position: relative;
+}
+
+.cards {
+  display: flex;
+}
+
+h2,
+h2 strong,
+h2 span {
+  vertical-align: middle;
+}
+
+body {
+  background: #24282f;
+  font-family: 'Arial';
+}
+
+.wrapper {
+  padding: 15px;
+}
+
+h2 {
+  padding: 10px;
+  padding-left: 25px;
+  color: #ccc;
+  margin: 0;
+}
+
+h2 strong {
+  z-index: 2;
+  background: #24282f;
+  padding: 4px 8px;
+}
+
+h2 span {
+  font-size: 0.7em;
+  color: #aaa;
+  margin-left: 10px;
+}
+
+h2:after {
+  content: '';
+  z-index: 1;
+  bottom: 50%;
+  margin-bottom: -2px;
+  height: 2px;
+  left: 0;
+  right: 0;
+  background: #373d47;
+}
+
+.cards {
+  flex-flow: row wrap;
+}
+
+.cards .card {
+  margin: 20px;
+  width: 180px;
+  height: 270px;
+  overflow: hidden;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.8);
+  transform-origin: center top;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+  transition: 0.3s;
+}
+
+.cards .card img {
+  width: 100%;
+  min-height: 100%;
+}
+
+.cards .card figcaption {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 4px;
+  font-size: 16px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #DDD;
+  transition: 0.3s;
+}
+
+#h2jscript {
+  cursor:pointer;
+}
+
+.cards .card:hover,
+.cards .card:focus,
+.cards .card:active {
+  box-shadow: 0 8px 16px 3px rgba(0,0,0,0.6);
+  transform: translateY(-3px) scale(1.05) rotateX(15deg);
+}
+
+.cards .card:hover figcaption,
+.cards .card:focus figcaption,
+.cards .card:active figcaption {
+  transform: none;
+}
+
+.cards .card:hover:after,
+.cards .card:focus:after,
+.cards .card:active:after {
+  transform: rotate(25deg);
+  top: -40%;
+  opacity: 0.15;
+}
+
+.quicklinks {
+  display: flex;
+  flex-flow: row wrap;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.quicklink {
+  margin: 10px;
+}
+
+/* unvisited link */
+a:link {
+  color: #ccc;
+}
+/* visited link */
+a:visited {
+  color: #ccc;
+}
+/* mouse over link */
+a:hover {
+  color: #EEE;
+}
+/* selected link */
+a:active {
+  color: #ccc;
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+.Menu {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#BackTopButton {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: red; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 20px; /* Increase font size */
+}
+
+.MenuButton {
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: #555;/* Set a background color */
+  color: #ccc; /* Text color */
+  padding: 5px; /* Some padding */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 20px;/* Increase font size */
+  margin-top: 10px;
+  margin-left: 15px;
+  cursor:pointer;
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #666; /* Add a dark-grey background on hover */
+  color: #eee; /* Text color */
+}
+
+#BackTopButton:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
+}
+
+select#combobselect {
+    background-color:#555;
+    color:#CCC;
+}
+
+#label {
+   font-size: 20px;
+   color: #CCC;
+}
+
+input{
+  display: block;
+  background: #fff;
+  padding: .6rem;
+  border-radius: 0.3rem;
+  width: 300px;
+  border: 0.1rem solid #BDBDBD;
+  outline: none;
+  height: 1rem;
+}
+
+input:hover{
+	border: 0.1rem solid #0F52BA !important;
+}
+
+#searchbutton{
+  display: block;
+  background: #fff;
+  padding: .6rem;
+  border-radius: 0.3rem;
+  width: 175px;
+  border: 0.1rem solid #BDBDBD;
+  outline: none;
+  height: 2rem;
+}
+
+#searchbutton:hover{
+	border: 0.1rem solid #0F52BA !important;
+}
+	</style>
+   <script>
+	function search() {
+		var input, filter, games, game, cards, card, i, j, txtValue, wrapper, quicklinks, quicklink, quicklinkid, needhide, numvisible, quicklinklinks, quicklinkvalue;
+		input = document.getElementById("search");
+		filter = input.value.toUpperCase();
+
+		wrapper = document.getElementById("wrapper");
+		parentElement = wrapper.parentElement;
+		fragment = document.createDocumentFragment();
+		fragment.appendChild(wrapper.cloneNode(true));
+		wrapper.remove();
+		games = fragment.childNodes[0].getElementsByTagName("figcaption");
+		i = games.length - 1;
+		while (i >= 0) {
+			game = games[i];
+			txtValue = game.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				game.parentElement.parentElement.style.display = "";
+			} else {
+				game.parentElement.parentElement.style.display = "none";
+			}
+			i--;
+		}
+		
+		quicklinks = fragment.childNodes[0].querySelectorAll("div[id^='quicklink-']")
+		i = quicklinks.length - 1;
+		while (i >= 0) {
+			quicklink = quicklinks[i];
+			quicklinkid = quicklink.id;
+			quicklinkvalue = quicklinkid.replace("quicklink-", "");
+			cards = fragment.getElementById(quicklinkid.replace("quicklink-", ""));
+			needhide = true;
+			if(cards)
+			{
+			
+				j = cards.children.length -1
+				numvisible = 0;
+				while (j >= 0)
+				{
+					if (cards.children[j].style.display == "")
+					{
+						needhide = false;
+						numvisible++;
+					}
+					j--;
+				}
+				
+				quicklinklinks = fragment.childNodes[0].querySelectorAll("option[value=\"#" + quicklinkid.replace(/["\\]/g, '\\$&') + "\"]")
+				if (needhide)
+				{
+					quicklink.style.display = "none";
+					cards.style.display = "none";
+					if (quicklinklinks.length == 1)
+					{
+						quicklink.children[0].children[0].innerHTML = "&#x25BA;";
+						quicklink.children[0].children[0].style.color = "#790000";
+						quicklinklinks[0].innerText = quicklinkvalue + " (" + numvisible.toString() + ")";
+						quicklink.children[0].children[1].children[0].innerText = "(" + numvisible.toString() + ")"
+						quicklinklinks[0].style.display = "none";
+					}
+				} else {
+					quicklink.style.display = "";					
+					cards.style.display = "";
+					if (quicklinklinks.length == 1)
+					{
+						quicklink.children[0].children[0].innerHTML = "&#x25BC;";
+						quicklink.children[0].children[0].style.color = "#007962";
+						quicklinklinks[0].innerText = quicklinkvalue + " (" + numvisible.toString() + ")";
+						quicklink.children[0].children[1].children[0].innerText = "(" + numvisible.toString() + ")"
+						quicklinklinks[0].style.display = "";
+					}
+				}
+			}
+			i--;
+		}
+		
+		parentElement.appendChild(fragment.childNodes[0]);
+		
+		//have to renable this
+		const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+		observer.observe();
+		
+		// Get the input field
+		var input = document.getElementById("search");
+
+		// Execute a function when the user releases a key on the keyboard
+		input.addEventListener("keyup", function(event) {
+		  // Number 13 is the "Enter" key on the keyboard
+		  if (event.keyCode === 13) {
+			// Cancel the default action, if needed
+			event.preventDefault();
+			// Trigger the button element with a click
+			document.getElementById("searchbutton").click();
+		  }
+		});
+	}
+  </script>
+  </head>
+  <body>
+    <button onclick="topFunction()" id="BackTopButton" title="Go to top">Top</button>
+    <div class="wrapper" id="wrapper">
+      <h2><strong>MAIN MENU - Serie<span>(Serie ascending / Name ascending)</span></strong></h2>
+      <div class="Menu"><a Class="MenuButton" href="index.html">Platform ▲</A><a Class="MenuButton" href="default_name_ascending_name_ascending.html">Name ▲</A><a Class="MenuButton" href="default_source_ascending_name_ascending.html">Source ▲</A><a Class="MenuButton" href="default_library_ascending_name_ascending.html">Library ▲</A><a Class="MenuButton" href="default%20combobox%20quicklinks_releaseyear_descending_name_ascending.html">Release Year ▼</A><a Class="MenuButton" href="default_agerating_ascending_name_ascending.html">Age Rating ▲</A><a Class="MenuButton" href="default_favorite_ascending_name_ascending.html">Favorite ▲</A><a Class="MenuButton" href="default_lastactivitysegment_ascending_name_ascending.html">Last Activity Segment ▲</A><a Class="MenuButton" href="default_playtimecategory_ascending_name_ascending.html">Playtime Category ▲</A><a Class="MenuButton" href="default_region_ascending_name_ascending.html">Region ▲</A><a Class="MenuButton" href="default_completionstatus_ascending_name_ascending.html">Completion Status ▲</A><a Class="MenuButton" href="default%20combobox%20quicklinks_userscore_descending_name_ascending.html">User Score ▼</A><a Class="MenuButton" href="default_userscoregroup_ascending_name_ascending.html">User Score Group ▲</A><a Class="MenuButton" href="default_userscorerating_ascending_name_ascending.html">User Score Rating ▲</A><a Class="MenuButton" href="default%20combobox%20quicklinks_communityscore_descending_name_ascending.html">Community Score ▼</A><a Class="MenuButton" href="default_communityscoregroup_ascending_name_ascending.html">Community Score Group ▲</A><a Class="MenuButton" href="default_communityscorerating_ascending_name_ascending.html">Community Score Rating ▲</A><a Class="MenuButton" href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html">Critic Score ▼</A><a Class="MenuButton" href="default_criticscoregroup_ascending_name_ascending.html">Critic Score Group ▲</A><a Class="MenuButton" href="default_criticscorerating_ascending_name_ascending.html">Critic Score Rating ▲</A><a Class="MenuButton" href="default%20combobox%20quicklinks_category_ascending_name_ascending.html">Category ▲</A><a Class="MenuButton" href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html">Genre ▲</A><a Class="MenuButton" href="default_addedsegment_ascending_name_ascending.html">Added Segment ▲</A><a Class="MenuButton" href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html">Developer ▲</A><a Class="MenuButton" href="default%20combobox%20quicklinks_feature_ascending_name_ascending.html">Feature ▲</A><a Class="MenuButton" href="default_installationstatus_ascending_name_ascending.html">Installation Status ▲</A><a Class="MenuButton" href="default_iscustomgame_ascending_name_ascending.html">Custom Game ▲</A><a Class="MenuButton" href="default_modifiedsegment_ascending_name_ascending.html">Modified Segment ▲</A><a Class="MenuButton" href="default%20combobox%20quicklinks_playcount_descending_name_ascending.html">Play Count ▼</A><a Class="MenuButton" href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html">Publisher ▲</A><a Class="MenuButton" href="default%20combobox%20quicklinks_serie_ascending_name_ascending.html">Serie ▲</A><a Class="MenuButton" href="default_hidden_ascending_name_ascending.html">Hidden ▲</A><a Class="MenuButton" href="default%20combobox%20quicklinks_added_descending_name_ascending.html">Added ▼</A><a Class="MenuButton" href="default%20combobox%20quicklinks_lastactivity_descending_name_ascending.html">Last Activity ▼</A><a Class="MenuButton" href="default%20combobox%20quicklinks_modified_descending_name_ascending.html">Modified ▼</A><a Class="MenuButton" href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html">Release Date ▼</A><a Class="MenuButton" href="default%20combobox%20quicklinks_playtime_descending_name_ascending.html">Playtime ▼</A><a Class="MenuButton" href="default%20combobox%20quicklinks_tag_ascending_name_ascending.html">Tag ▲</A></div>
+      <h2><strong>Search</strong></h2><input type="text" id="search" placeholder="Type in a game name to search"><br/><button onclick="search()" id="searchbutton">Search</button>
+      <h2><strong>Quick Links</strong></h2>
+      <P id="label">Serie: <select id="combobselect" onchange="window.location=this.options[this.selectedIndex].value"><option value="#quicklink-None">None (24)</option><option value="#quicklink-Ace Attorney">Ace Attorney (6)</option><option value="#quicklink-Advance Wars">Advance Wars (1)</option><option value="#quicklink-Adventure Island">Adventure Island (1)</option><option value="#quicklink-Assassin&#39;s Creed">Assassin&#39;s Creed (3)</option><option value="#quicklink-Axiom Verge">Axiom Verge (1)</option><option value="#quicklink-Bionic Commando">Bionic Commando (1)</option><option value="#quicklink-Bioshock">Bioshock (1)</option><option value="#quicklink-Black Mirror">Black Mirror (1)</option><option value="#quicklink-Bloodstained: Ritual of the Night">Bloodstained: Ritual of the Night (1)</option><option value="#quicklink-Castlevania">Castlevania (4)</option><option value="#quicklink-Castlevania: Lords of Shadow">Castlevania: Lords of Shadow (2)</option><option value="#quicklink-Celeste">Celeste (1)</option><option value="#quicklink-Dark Souls">Dark Souls (2)</option><option value="#quicklink-Dirt">Dirt (1)</option><option value="#quicklink-Divinity">Divinity (1)</option><option value="#quicklink-Downtown Nekketsu">Downtown Nekketsu (1)</option><option value="#quicklink-Dragon Ball Z: Supersonic Warriors">Dragon Ball Z: Supersonic Warriors (1)</option><option value="#quicklink-Dragon Ball Z: The Legacy of Goku">Dragon Ball Z: The Legacy of Goku (1)</option><option value="#quicklink-EarthBound">EarthBound (1)</option><option value="#quicklink-Evoland">Evoland (1)</option><option value="#quicklink-Final Fantasy Tactics">Final Fantasy Tactics (2)</option><option value="#quicklink-Fire Emblem">Fire Emblem (1)</option><option value="#quicklink-Grand Theft Auto">Grand Theft Auto (1)</option><option value="#quicklink-Guacamelee!">Guacamelee! (1)</option><option value="#quicklink-Hollow Knight">Hollow Knight (1)</option><option value="#quicklink-Human Fall Flat">Human Fall Flat (1)</option><option value="#quicklink-Infinity">Infinity (1)</option><option value="#quicklink-Kingdom">Kingdom (1)</option><option value="#quicklink-Kingdom Rush">Kingdom Rush (1)</option><option value="#quicklink-Klonoa">Klonoa (1)</option><option value="#quicklink-Kunio-kun">Kunio-kun (1)</option><option value="#quicklink-Little Nightmares">Little Nightmares (1)</option><option value="#quicklink-Magic: The Gathering – Duels of the Planeswalkers">Magic: The Gathering – Duels of the Planeswalkers (1)</option><option value="#quicklink-Mario &amp; Luigi">Mario &amp; Luigi (1)</option><option value="#quicklink-Mario Kart">Mario Kart (1)</option><option value="#quicklink-Metroid">Metroid (3)</option><option value="#quicklink-Metroid Prime">Metroid Prime (1)</option><option value="#quicklink-Minecraft">Minecraft (1)</option><option value="#quicklink-Naruto: Path of the Ninja">Naruto: Path of the Ninja (1)</option><option value="#quicklink-Nekketsu High School">Nekketsu High School (1)</option><option value="#quicklink-Nioh">Nioh (1)</option><option value="#quicklink-Ogre Battle">Ogre Battle (1)</option><option value="#quicklink-Ori">Ori (1)</option><option value="#quicklink-Outer Wilds">Outer Wilds (1)</option><option value="#quicklink-Pok&#233;mon">Pok&#233;mon (2)</option><option value="#quicklink-Super Mario Advance">Super Mario Advance (1)</option><option value="#quicklink-Swords Of Legends">Swords Of Legends (1)</option><option value="#quicklink-Teenage Mutant Ninja Turtles">Teenage Mutant Ninja Turtles (1)</option><option value="#quicklink-Terraria">Terraria (1)</option><option value="#quicklink-The Elder Scrolls">The Elder Scrolls (1)</option><option value="#quicklink-The King of Fighters">The King of Fighters (2)</option><option value="#quicklink-The Witcher">The Witcher (1)</option><option value="#quicklink-To the Moon">To the Moon (1)</option><option value="#quicklink-Torchlight">Torchlight (1)</option><option value="#quicklink-Yakuza">Yakuza (1)</option><option value="#quicklink-Yu-Gi-Oh! World Championship">Yu-Gi-Oh! World Championship (1)</option><option value="#quicklink-Zero Escape">Zero Escape (1)</option></select></P>
+      <div id="quicklink-None"><h2 id="h2jscript" onclick="ShowHide('None')"><strong id="eye-None" style="color: #007962;">&#x25BC;</strong><strong>None<span>( 24 )</span></strong></h2></div>
+<div id="None" class="cards">
+<figure class="card">
+  <a href="c7703d1d-98d7-44fa-bb07-789293259ba9.html">
+  <img class="lozad" data-src="c7703d1d-98d7-44fa-bb07-789293259ba9/137a0208-b27c-4ff7-b767-fe0882fc745d.jpg"/>
+  <figcaption>Inside</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="aaeb6458-14d7-4f4e-99ab-082f55b43a1f.html">
+  <img class="lozad" data-src="aaeb6458-14d7-4f4e-99ab-082f55b43a1f/0ae5d27b-09e2-4326-a815-343784a281f7.jpg"/>
+  <figcaption>三国杀</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="054ae868-5a45-4ea4-9165-8a96eae109b4.html">
+  <img class="lozad" data-src="054ae868-5a45-4ea4-9165-8a96eae109b4/ef4e2355-e75b-4b5b-ad76-2c3754def6aa.jpg"/>
+  <figcaption>二重奏</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="3303f9bd-d964-4fa0-a4a4-3ec14de9c768.html">
+  <img class="lozad" data-src="3303f9bd-d964-4fa0-a4a4-3ec14de9c768/e4abeac3-a5bd-44e8-883a-fb5d87d288c2.jpg"/>
+  <figcaption>双人成行</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="5ef64e4c-3e9d-4cb8-ae6f-58da69b3d4e1.html">
+  <img class="lozad" data-src="5ef64e4c-3e9d-4cb8-ae6f-58da69b3d4e1/db6709b8-6258-41f7-bf1d-d8184fe1fe83.jpg"/>
+  <figcaption>只狼：影逝二度</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="884152e3-b93b-4591-a458-bc9dad7636ce.html">
+  <img class="lozad" data-src="884152e3-b93b-4591-a458-bc9dad7636ce/3452f054-ec8b-4718-8c0b-ea29c1ad8af6.jpg"/>
+  <figcaption>喵斯快跑</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="6f6442b1-0dc9-4f73-a706-c60c8dd3b3fe.html">
+  <img class="lozad" data-src="6f6442b1-0dc9-4f73-a706-c60c8dd3b3fe/30e6fe9d-ccab-4acd-9662-dee49cbf4f44.jpg"/>
+  <figcaption>地狱边境</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="1b178bbe-a8d7-420c-865c-63eb057e8c35.html">
+  <img class="lozad" data-src="1b178bbe-a8d7-420c-865c-63eb057e8c35/35162de6-ad52-4fdf-9e2b-2bb02cd6571b.jpg"/>
+  <figcaption>天命奇御</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="733eb737-36c3-4ed8-acef-9b20e4657a7a.html">
+  <img class="lozad" data-src="733eb737-36c3-4ed8-acef-9b20e4657a7a/ae46fe35-91dd-4243-98ac-fe89d3ca0f93.jpg"/>
+  <figcaption>屋顶乱斗</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="23a78bd0-9bf6-4088-8c72-88a1929d5b0e.html">
+  <img class="lozad" data-src="23a78bd0-9bf6-4088-8c72-88a1929d5b0e/52689f7a-20c8-48a2-aa17-e1f42010d94d.jpg"/>
+  <figcaption>幽灵轨迹</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="56f68a6c-a71a-480d-95eb-9bb2453a2862.html">
+  <img class="lozad" data-src="56f68a6c-a71a-480d-95eb-9bb2453a2862/fedde3a9-b637-45c8-845e-1b3b66d8ad88.jpg"/>
+  <figcaption>时空幻境</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="26ec55b9-7924-4178-b844-0ae5d9200613.html">
+  <img class="lozad" data-src="26ec55b9-7924-4178-b844-0ae5d9200613/934de8a9-22a3-4c7d-b492-f001628ef8e6.jpg"/>
+  <figcaption>星露谷物语</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="8f42c9eb-bcb3-432b-b25b-9cf82b69fabb.html">
+  <img class="lozad" data-src="8f42c9eb-bcb3-432b-b25b-9cf82b69fabb/9aacdac5-2c12-4a05-8f4b-643bf1ff5e5a.jpg"/>
+  <figcaption>晶体管</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="1cef2395-ab62-4c18-9f0f-671ab0e8f289.html">
+  <img class="lozad" data-src="1cef2395-ab62-4c18-9f0f-671ab0e8f289/7d23832e-3c17-4d90-aa20-f51d17bac825.jpg"/>
+  <figcaption>武装原型</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="15db5480-b49b-4e8a-b25d-74782b977ac6.html">
+  <img class="lozad" data-src="15db5480-b49b-4e8a-b25d-74782b977ac6/e4e39e4d-4dfb-4882-a7e3-c6f79ba7ae5b.jpg"/>
+  <figcaption>死亡细胞</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="504facd1-f282-4dae-9bdd-6efae86af9a3.html">
+  <img class="lozad" data-src="504facd1-f282-4dae-9bdd-6efae86af9a3/9749b89d-b320-4ea9-85e7-c72179f0d60d.jpg"/>
+  <figcaption>漂移86</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="cbb45ddc-5859-41ed-a53d-3d99e9a9c3b7.html">
+  <img class="lozad" data-src="cbb45ddc-5859-41ed-a53d-3d99e9a9c3b7/c52d54d9-d7d2-49bb-bc5a-622cb3712695.jpg"/>
+  <figcaption>画中世界</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="9777c665-456e-4a95-ba66-fa8d211b13a8.html">
+  <img class="lozad" data-src="9777c665-456e-4a95-ba66-fa8d211b13a8/eb73525e-6ea0-4198-8932-498974e88d64.jpg"/>
+  <figcaption>盐与避难所</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="41757a9e-d070-4347-a324-0f3ed86ad186.html">
+  <img class="lozad" data-src="41757a9e-d070-4347-a324-0f3ed86ad186/10ac7723-5268-4d48-b04c-2c0ae1afc317.jpg"/>
+  <figcaption>红视：增强版</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="0d43d75f-7bb8-4730-89f3-8271a4de8780.html">
+  <img class="lozad" data-src="0d43d75f-7bb8-4730-89f3-8271a4de8780/386c89c5-402f-4fcf-9c20-5e1e16610f7b.jpg"/>
+  <figcaption>艾尔登法环</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="c0977ce3-9c5e-4b69-bebc-483b50919a2e.html">
+  <img class="lozad" data-src="c0977ce3-9c5e-4b69-bebc-483b50919a2e/86316a4a-d8a8-47e3-b5ed-b8d328527bb7.jpg"/>
+  <figcaption>英灵乱战</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="ef1eab88-e61b-4ca9-b27a-c6dbc7155469.html">
+  <img class="lozad" data-src="ef1eab88-e61b-4ca9-b27a-c6dbc7155469/15d2b60f-9223-489b-954e-8fc6476ae5c7.jpg"/>
+  <figcaption>贝克汉姆足球岛</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="2e34836e-a1f7-4984-9965-2d1d07cbfcc5.html">
+  <img class="lozad" data-src="2e34836e-a1f7-4984-9965-2d1d07cbfcc5/fc502a55-df5e-44de-9bc1-5fa6dfa43bfb.jpg"/>
+  <figcaption>超级兔子人</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="0ca9da6c-0475-4ba4-8800-8033b4fb3c91.html">
+  <img class="lozad" data-src="0ca9da6c-0475-4ba4-8800-8033b4fb3c91/d2b69f7f-ee18-49d6-a437-09f3ec397278.jpg"/>
+  <figcaption>阿修罗之怒</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Ace Attorney"><h2 id="h2jscript" onclick="ShowHide('Ace Attorney')"><strong id="eye-Ace Attorney" style="color: #007962;">&#x25BC;</strong><strong>Ace Attorney<span>( 6 )</span></strong></h2></div>
+<div id="Ace Attorney" class="cards">
+<figure class="card">
+  <a href="60f69e4f-d7f5-40a3-a097-a2a30946a946.html">
+  <img class="lozad" data-src="60f69e4f-d7f5-40a3-a097-a2a30946a946/5ae27aa6-4235-45d7-b15a-e0b50cc75226.jpg"/>
+  <figcaption>大逆转裁判：编年史</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="e36a08a5-595d-4b1f-88f7-85482a1e8fc3.html">
+  <img class="lozad" data-src="e36a08a5-595d-4b1f-88f7-85482a1e8fc3/b419c01e-d961-462f-93ed-7401c0ae2da4.jpg"/>
+  <figcaption>逆转裁判1</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="b656eaed-a122-4982-a7c2-5a6563680981.html">
+  <img class="lozad" data-src="b656eaed-a122-4982-a7c2-5a6563680981/e9736ba4-fb89-42f5-9fd9-58873e88aae1.jpg"/>
+  <figcaption>逆转裁判2</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="8f8f5c09-5cf4-4bc7-a0a5-bd9005ef41a3.html">
+  <img class="lozad" data-src="8f8f5c09-5cf4-4bc7-a0a5-bd9005ef41a3/8b29a9fa-798c-4b46-b898-08bd62595413.jpg"/>
+  <figcaption>逆转裁判3</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="1dc62311-2dd3-4b22-a0c4-4a9a15da1b5f.html">
+  <img class="lozad" data-src="1dc62311-2dd3-4b22-a0c4-4a9a15da1b5f/995ad874-09c6-4436-b643-85afc640693d.jpg"/>
+  <figcaption>逆转裁判4</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="268c1edd-39c6-4a5b-8a1f-7c6956a33295.html">
+  <img class="lozad" data-src="268c1edd-39c6-4a5b-8a1f-7c6956a33295/98f4e293-90a1-48b0-88aa-35b39e1f116c.jpg"/>
+  <figcaption>逆转裁判5</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Advance Wars"><h2 id="h2jscript" onclick="ShowHide('Advance Wars')"><strong id="eye-Advance Wars" style="color: #007962;">&#x25BC;</strong><strong>Advance Wars<span>( 1 )</span></strong></h2></div>
+<div id="Advance Wars" class="cards">
+<figure class="card">
+  <a href="9e886d78-c154-466a-a09f-070e00433fbf.html">
+  <img class="lozad" data-src="9e886d78-c154-466a-a09f-070e00433fbf/fb9bfe3f-e4e6-4789-8cac-3c87c219926c.jpg"/>
+  <figcaption>高级战争</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Adventure Island"><h2 id="h2jscript" onclick="ShowHide('Adventure Island')"><strong id="eye-Adventure Island" style="color: #007962;">&#x25BC;</strong><strong>Adventure Island<span>( 1 )</span></strong></h2></div>
+<div id="Adventure Island" class="cards">
+<figure class="card">
+  <a href="755f188d-315f-452f-882d-a5defb45febe.html">
+  <img class="lozad" data-src="755f188d-315f-452f-882d-a5defb45febe/88b81147-a3cf-466a-8d90-daa34b1c5564.jpg"/>
+  <figcaption>冒险岛4</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Assassin&#39;s Creed"><h2 id="h2jscript" onclick="ShowHide('Assassin&#39;s Creed')"><strong id="eye-Assassin&#39;s Creed" style="color: #007962;">&#x25BC;</strong><strong>Assassin&#39;s Creed<span>( 3 )</span></strong></h2></div>
+<div id="Assassin&#39;s Creed" class="cards">
+<figure class="card">
+  <a href="a094f12f-351e-4fd6-87b2-631e073ea19b.html">
+  <img class="lozad" data-src="a094f12f-351e-4fd6-87b2-631e073ea19b/342b1ea5-f0cb-4e67-a05d-156d2e3adf0b.jpg"/>
+  <figcaption>刺客信条2</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="fcb223fb-416e-403b-83d1-f35207f015e9.html">
+  <img class="lozad" data-src="fcb223fb-416e-403b-83d1-f35207f015e9/60dfe0a9-e55b-47af-8a38-a9f13527a271.jpg"/>
+  <figcaption>刺客信条2：兄弟会</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="3366e60e-fa23-4e3f-93a8-580387da5ef9.html">
+  <img class="lozad" data-src="3366e60e-fa23-4e3f-93a8-580387da5ef9/fd0404dc-2364-4428-b9f2-daa5e8a87766.jpg"/>
+  <figcaption>刺客信条2：启示录</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Axiom Verge"><h2 id="h2jscript" onclick="ShowHide('Axiom Verge')"><strong id="eye-Axiom Verge" style="color: #007962;">&#x25BC;</strong><strong>Axiom Verge<span>( 1 )</span></strong></h2></div>
+<div id="Axiom Verge" class="cards">
+<figure class="card">
+  <a href="1c05d4dd-d365-4548-98f7-3f0ec591a447.html">
+  <img class="lozad" data-src="1c05d4dd-d365-4548-98f7-3f0ec591a447/a5f2becf-7543-4d3d-aa2c-d73c4f358720.jpg"/>
+  <figcaption>公理边缘</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Bionic Commando"><h2 id="h2jscript" onclick="ShowHide('Bionic Commando')"><strong id="eye-Bionic Commando" style="color: #007962;">&#x25BC;</strong><strong>Bionic Commando<span>( 1 )</span></strong></h2></div>
+<div id="Bionic Commando" class="cards">
+<figure class="card">
+  <a href="ac692afd-5187-446c-87f8-91624493e402.html">
+  <img class="lozad" data-src="ac692afd-5187-446c-87f8-91624493e402/b14485b4-3eb2-451b-9cd3-fd23efc7f2c1.jpg"/>
+  <figcaption>希魔复活：重装上阵</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Bioshock"><h2 id="h2jscript" onclick="ShowHide('Bioshock')"><strong id="eye-Bioshock" style="color: #007962;">&#x25BC;</strong><strong>Bioshock<span>( 1 )</span></strong></h2></div>
+<div id="Bioshock" class="cards">
+<figure class="card">
+  <a href="8f0eb0b8-bfbe-43cd-9786-38dac6064173.html">
+  <img class="lozad" data-src="8f0eb0b8-bfbe-43cd-9786-38dac6064173/797cda61-4c4e-42b8-a8bd-abebc7b609ac.jpg"/>
+  <figcaption>生化奇兵：无限</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Black Mirror"><h2 id="h2jscript" onclick="ShowHide('Black Mirror')"><strong id="eye-Black Mirror" style="color: #007962;">&#x25BC;</strong><strong>Black Mirror<span>( 1 )</span></strong></h2></div>
+<div id="Black Mirror" class="cards">
+<figure class="card">
+  <a href="4162d0dc-b82f-440d-ac80-234ae04e4c33.html">
+  <img class="lozad" data-src="4162d0dc-b82f-440d-ac80-234ae04e4c33/8e0b5a25-ab6c-4cbd-aac4-b4c6713edcaa.jpg"/>
+  <figcaption>黑镜3</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Bloodstained: Ritual of the Night"><h2 id="h2jscript" onclick="ShowHide('Bloodstained: Ritual of the Night')"><strong id="eye-Bloodstained: Ritual of the Night" style="color: #007962;">&#x25BC;</strong><strong>Bloodstained: Ritual of the Night<span>( 1 )</span></strong></h2></div>
+<div id="Bloodstained: Ritual of the Night" class="cards">
+<figure class="card">
+  <a href="f845f8ce-6375-4d6b-987a-d6a6c89e950b.html">
+  <img class="lozad" data-src="f845f8ce-6375-4d6b-987a-d6a6c89e950b/3d292cf0-a377-4db1-a75a-b5956535e3d5.jpg"/>
+  <figcaption>赤痕：夜之仪式</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Castlevania"><h2 id="h2jscript" onclick="ShowHide('Castlevania')"><strong id="eye-Castlevania" style="color: #007962;">&#x25BC;</strong><strong>Castlevania<span>( 4 )</span></strong></h2></div>
+<div id="Castlevania" class="cards">
+<figure class="card">
+  <a href="fa87b7bb-ca5a-405a-aedb-2d17be72389f.html">
+  <img class="lozad" data-src="fa87b7bb-ca5a-405a-aedb-2d17be72389f/b113e833-064b-4f44-9da5-6eac820425fa.jpg"/>
+  <figcaption>恶魔城：晓月圆舞曲</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="0e93e65e-0e7f-486b-bfdc-ef978b91cfef.html">
+  <img class="lozad" data-src="0e93e65e-0e7f-486b-bfdc-ef978b91cfef/0194769c-5db0-41f1-a7a7-cb0976746721.jpg"/>
+  <figcaption>恶魔城：月下夜想曲</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="787505be-9e8b-42f4-91eb-3c86e49bde5b.html">
+  <img class="lozad" data-src="787505be-9e8b-42f4-91eb-3c86e49bde5b/9e5de92e-a756-4aca-b5e9-025427232af2.jpg"/>
+  <figcaption>恶魔城：白夜协奏曲</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="35f8f3f6-9363-4de8-a81a-75a23bce0336.html">
+  <img class="lozad" data-src="35f8f3f6-9363-4de8-a81a-75a23bce0336/c20ba3f5-fb16-4f5c-a048-5f2a3b51dfbb.jpg"/>
+  <figcaption>恶魔城：被夺走的刻印</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Castlevania: Lords of Shadow"><h2 id="h2jscript" onclick="ShowHide('Castlevania: Lords of Shadow')"><strong id="eye-Castlevania: Lords of Shadow" style="color: #007962;">&#x25BC;</strong><strong>Castlevania: Lords of Shadow<span>( 2 )</span></strong></h2></div>
+<div id="Castlevania: Lords of Shadow" class="cards">
+<figure class="card">
+  <a href="0b65d2c0-b8a2-43c5-ae81-0d45760224ed.html">
+  <img class="lozad" data-src="0b65d2c0-b8a2-43c5-ae81-0d45760224ed/aa12aa7a-21b9-42eb-aa53-6ba792f76912.jpg"/>
+  <figcaption>恶魔城：暗影之王</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="97d6a621-9e99-40fc-a696-951e878d233e.html">
+  <img class="lozad" data-src="97d6a621-9e99-40fc-a696-951e878d233e/681e6973-d0ca-4151-a223-4038f7e4e269.jpg"/>
+  <figcaption>恶魔城：暗影之王2</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Celeste"><h2 id="h2jscript" onclick="ShowHide('Celeste')"><strong id="eye-Celeste" style="color: #007962;">&#x25BC;</strong><strong>Celeste<span>( 1 )</span></strong></h2></div>
+<div id="Celeste" class="cards">
+<figure class="card">
+  <a href="e4e4000e-4bd5-4744-b3bb-3cad552be525.html">
+  <img class="lozad" data-src="e4e4000e-4bd5-4744-b3bb-3cad552be525/523cf6b5-a244-4377-80d7-e5417bd4358c.jpg"/>
+  <figcaption>蔚蓝</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Dark Souls"><h2 id="h2jscript" onclick="ShowHide('Dark Souls')"><strong id="eye-Dark Souls" style="color: #007962;">&#x25BC;</strong><strong>Dark Souls<span>( 2 )</span></strong></h2></div>
+<div id="Dark Souls" class="cards">
+<figure class="card">
+  <a href="1d16e608-891a-4610-a93d-85a1ad130c7f.html">
+  <img class="lozad" data-src="1d16e608-891a-4610-a93d-85a1ad130c7f/eb086d48-363b-4dc5-b4f5-1423eb6a0a8b.jpg"/>
+  <figcaption>黑暗之魂3</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="a69b0606-b293-4c78-aeb3-a5c0d93e960c.html">
+  <img class="lozad" data-src="a69b0606-b293-4c78-aeb3-a5c0d93e960c/5b152b41-9270-4ae5-8dc8-0ab4b9d7e7d9.jpg"/>
+  <figcaption>黑暗之魂重制版</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Dirt"><h2 id="h2jscript" onclick="ShowHide('Dirt')"><strong id="eye-Dirt" style="color: #007962;">&#x25BC;</strong><strong>Dirt<span>( 1 )</span></strong></h2></div>
+<div id="Dirt" class="cards">
+<figure class="card">
+  <a href="5d7d0064-0673-4914-b88c-6d30ac4ac186.html">
+  <img class="lozad" data-src="5d7d0064-0673-4914-b88c-6d30ac4ac186/aab05fd8-3541-4880-a2c0-ae040014cf00.jpg"/>
+  <figcaption>尘埃3</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Divinity"><h2 id="h2jscript" onclick="ShowHide('Divinity')"><strong id="eye-Divinity" style="color: #007962;">&#x25BC;</strong><strong>Divinity<span>( 1 )</span></strong></h2></div>
+<div id="Divinity" class="cards">
+<figure class="card">
+  <a href="03d62d5b-5c4b-44e8-9f55-b9eb658d4c7d.html">
+  <img class="lozad" data-src="03d62d5b-5c4b-44e8-9f55-b9eb658d4c7d/1d79bdce-aaee-4de0-95d7-8843f391f858.jpg"/>
+  <figcaption>神界：原罪2</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Downtown Nekketsu"><h2 id="h2jscript" onclick="ShowHide('Downtown Nekketsu')"><strong id="eye-Downtown Nekketsu" style="color: #007962;">&#x25BC;</strong><strong>Downtown Nekketsu<span>( 1 )</span></strong></h2></div>
+<div id="Downtown Nekketsu" class="cards">
+<figure class="card">
+  <a href="bc9e75f7-af86-4315-b291-c832d96d2e78.html">
+  <img class="lozad" data-src="bc9e75f7-af86-4315-b291-c832d96d2e78/bb940894-8ec7-4ea9-b3d5-800f5fa3a54f.jpg"/>
+  <figcaption>热血物语EX</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Dragon Ball Z: Supersonic Warriors"><h2 id="h2jscript" onclick="ShowHide('Dragon Ball Z: Supersonic Warriors')"><strong id="eye-Dragon Ball Z: Supersonic Warriors" style="color: #007962;">&#x25BC;</strong><strong>Dragon Ball Z: Supersonic Warriors<span>( 1 )</span></strong></h2></div>
+<div id="Dragon Ball Z: Supersonic Warriors" class="cards">
+<figure class="card">
+  <a href="3c1cc84c-4557-48a0-b35d-5afd55846735.html">
+  <img class="lozad" data-src="3c1cc84c-4557-48a0-b35d-5afd55846735/1b646639-bf13-45d0-9bde-cea15053dd64.jpg"/>
+  <figcaption>龙珠Z：武空斗剧</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Dragon Ball Z: The Legacy of Goku"><h2 id="h2jscript" onclick="ShowHide('Dragon Ball Z: The Legacy of Goku')"><strong id="eye-Dragon Ball Z: The Legacy of Goku" style="color: #007962;">&#x25BC;</strong><strong>Dragon Ball Z: The Legacy of Goku<span>( 1 )</span></strong></h2></div>
+<div id="Dragon Ball Z: The Legacy of Goku" class="cards">
+<figure class="card">
+  <a href="2c87283c-8767-4902-8542-0fc2bdda4551.html">
+  <img class="lozad" data-src="2c87283c-8767-4902-8542-0fc2bdda4551/5a10634e-0f50-438c-a230-094174505273.jpg"/>
+  <figcaption>龙珠Z：悟空的遗产2</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-EarthBound"><h2 id="h2jscript" onclick="ShowHide('EarthBound')"><strong id="eye-EarthBound" style="color: #007962;">&#x25BC;</strong><strong>EarthBound<span>( 1 )</span></strong></h2></div>
+<div id="EarthBound" class="cards">
+<figure class="card">
+  <a href="089b1a7d-0e34-4783-a019-777c49249be4.html">
+  <img class="lozad" data-src="089b1a7d-0e34-4783-a019-777c49249be4/fa40cae3-942e-4d1a-a45d-245008fb793a.jpg"/>
+  <figcaption>地球冒险3</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Evoland"><h2 id="h2jscript" onclick="ShowHide('Evoland')"><strong id="eye-Evoland" style="color: #007962;">&#x25BC;</strong><strong>Evoland<span>( 1 )</span></strong></h2></div>
+<div id="Evoland" class="cards">
+<figure class="card">
+  <a href="328f1fac-d3fa-4371-8270-b8e55f5d9eda.html">
+  <img class="lozad" data-src="328f1fac-d3fa-4371-8270-b8e55f5d9eda/6dc3777d-a6b0-406e-ba89-ae5639363afa.jpg"/>
+  <figcaption>进化之地</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Final Fantasy Tactics"><h2 id="h2jscript" onclick="ShowHide('Final Fantasy Tactics')"><strong id="eye-Final Fantasy Tactics" style="color: #007962;">&#x25BC;</strong><strong>Final Fantasy Tactics<span>( 2 )</span></strong></h2></div>
+<div id="Final Fantasy Tactics" class="cards">
+<figure class="card">
+  <a href="ae8c59be-d43d-4e41-8cdc-c41ec838e172.html">
+  <img class="lozad" data-src="ae8c59be-d43d-4e41-8cdc-c41ec838e172/c7b2caea-6518-462c-a46e-632ecf4829fd.jpg"/>
+  <figcaption>最终幻想：战略版A2</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="db8f5d10-4679-40cf-a8d7-4264d1ac8d00.html">
+  <img class="lozad" data-src="db8f5d10-4679-40cf-a8d7-4264d1ac8d00/ee983b25-3a48-424f-a104-ccc95b47946f.jpg"/>
+  <figcaption>最终幻想：战略版Advance</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Fire Emblem"><h2 id="h2jscript" onclick="ShowHide('Fire Emblem')"><strong id="eye-Fire Emblem" style="color: #007962;">&#x25BC;</strong><strong>Fire Emblem<span>( 1 )</span></strong></h2></div>
+<div id="Fire Emblem" class="cards">
+<figure class="card">
+  <a href="d411f261-80ca-47c7-843c-d718ca5b1b71.html">
+  <img class="lozad" data-src="d411f261-80ca-47c7-843c-d718ca5b1b71/c4f6e82a-fafc-4b80-9e61-a0a71b076406.jpg"/>
+  <figcaption>火焰之纹章：圣魔之光石</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Grand Theft Auto"><h2 id="h2jscript" onclick="ShowHide('Grand Theft Auto')"><strong id="eye-Grand Theft Auto" style="color: #007962;">&#x25BC;</strong><strong>Grand Theft Auto<span>( 1 )</span></strong></h2></div>
+<div id="Grand Theft Auto" class="cards">
+<figure class="card">
+  <a href="954d25a6-1801-4fb7-ad3b-f73158535320.html">
+  <img class="lozad" data-src="954d25a6-1801-4fb7-ad3b-f73158535320/f94279ca-b0e5-4baf-9569-3b58c8bee7df.jpg"/>
+  <figcaption>侠盗猎车5</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Guacamelee!"><h2 id="h2jscript" onclick="ShowHide('Guacamelee!')"><strong id="eye-Guacamelee!" style="color: #007962;">&#x25BC;</strong><strong>Guacamelee!<span>( 1 )</span></strong></h2></div>
+<div id="Guacamelee!" class="cards">
+<figure class="card">
+  <a href="63daf752-b470-4b09-ac51-e214ce82cb27.html">
+  <img class="lozad" data-src="63daf752-b470-4b09-ac51-e214ce82cb27/214b4269-c772-4bf6-b1aa-3554c5adae8e.jpg"/>
+  <figcaption>墨西哥英雄大混战</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Hollow Knight"><h2 id="h2jscript" onclick="ShowHide('Hollow Knight')"><strong id="eye-Hollow Knight" style="color: #007962;">&#x25BC;</strong><strong>Hollow Knight<span>( 1 )</span></strong></h2></div>
+<div id="Hollow Knight" class="cards">
+<figure class="card">
+  <a href="c09f44b7-8902-4049-be51-4992cce1e17a.html">
+  <img class="lozad" data-src="c09f44b7-8902-4049-be51-4992cce1e17a/544431dd-9af9-43f2-a3d4-218fa8df5adb.jpg"/>
+  <figcaption>空洞骑士</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Human Fall Flat"><h2 id="h2jscript" onclick="ShowHide('Human Fall Flat')"><strong id="eye-Human Fall Flat" style="color: #007962;">&#x25BC;</strong><strong>Human Fall Flat<span>( 1 )</span></strong></h2></div>
+<div id="Human Fall Flat" class="cards">
+<figure class="card">
+  <a href="131cac39-9b08-4b9b-a5a1-e4b61a442278.html">
+  <img class="lozad" data-src="131cac39-9b08-4b9b-a5a1-e4b61a442278/95d63048-e674-4c44-9fcb-f4a9401c30af.jpg"/>
+  <figcaption>人类一败涂地</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Infinity"><h2 id="h2jscript" onclick="ShowHide('Infinity')"><strong id="eye-Infinity" style="color: #007962;">&#x25BC;</strong><strong>Infinity<span>( 1 )</span></strong></h2></div>
+<div id="Infinity" class="cards">
+<figure class="card">
+  <a href="09c69548-8b0e-41ed-8285-45085b39f26d.html">
+  <img class="lozad" data-src="09c69548-8b0e-41ed-8285-45085b39f26d/9416b2ee-97ea-4bf4-bb90-595d88b12e86.jpg"/>
+  <figcaption>时空轮回</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Kingdom"><h2 id="h2jscript" onclick="ShowHide('Kingdom')"><strong id="eye-Kingdom" style="color: #007962;">&#x25BC;</strong><strong>Kingdom<span>( 1 )</span></strong></h2></div>
+<div id="Kingdom" class="cards">
+<figure class="card">
+  <a href="afad32e6-eed2-4340-b017-3a7634b7b0b0.html">
+  <img class="lozad" data-src="afad32e6-eed2-4340-b017-3a7634b7b0b0/9b3c2d12-1f4d-4657-8420-48a18a263117.jpg"/>
+  <figcaption>王国</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Kingdom Rush"><h2 id="h2jscript" onclick="ShowHide('Kingdom Rush')"><strong id="eye-Kingdom Rush" style="color: #007962;">&#x25BC;</strong><strong>Kingdom Rush<span>( 1 )</span></strong></h2></div>
+<div id="Kingdom Rush" class="cards">
+<figure class="card">
+  <a href="976064d9-1fab-4fbd-8cd1-c57bc8093878.html">
+  <img class="lozad" data-src="976064d9-1fab-4fbd-8cd1-c57bc8093878/bea9810a-52ee-4e6b-82f1-3dc4446bf394.jpg"/>
+  <figcaption>王国保卫战</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Klonoa"><h2 id="h2jscript" onclick="ShowHide('Klonoa')"><strong id="eye-Klonoa" style="color: #007962;">&#x25BC;</strong><strong>Klonoa<span>( 1 )</span></strong></h2></div>
+<div id="Klonoa" class="cards">
+<figure class="card">
+  <a href="54d33f81-b1b9-46d3-835a-5e46dad47fc3.html">
+  <img class="lozad" data-src="54d33f81-b1b9-46d3-835a-5e46dad47fc3/942d433b-52ee-42bb-a108-7e52d6b0471c.jpg"/>
+  <figcaption>风之少年：梦之帝国</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Kunio-kun"><h2 id="h2jscript" onclick="ShowHide('Kunio-kun')"><strong id="eye-Kunio-kun" style="color: #007962;">&#x25BC;</strong><strong>Kunio-kun<span>( 1 )</span></strong></h2></div>
+<div id="Kunio-kun" class="cards">
+<figure class="card">
+  <a href="96cb21dc-5dde-4650-8724-5eac64dca99d.html">
+  <img class="lozad" data-src="96cb21dc-5dde-4650-8724-5eac64dca99d/0cd03dad-38db-4b87-bcf8-14192839bd5e.jpg"/>
+  <figcaption>热血格斗传说</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Little Nightmares"><h2 id="h2jscript" onclick="ShowHide('Little Nightmares')"><strong id="eye-Little Nightmares" style="color: #007962;">&#x25BC;</strong><strong>Little Nightmares<span>( 1 )</span></strong></h2></div>
+<div id="Little Nightmares" class="cards">
+<figure class="card">
+  <a href="751fb188-cfc3-49c7-a7df-c4137d8b5bc2.html">
+  <img class="lozad" data-src="751fb188-cfc3-49c7-a7df-c4137d8b5bc2/251413cd-fc53-451d-8b2f-2a1f5bde8b4b.jpg"/>
+  <figcaption>小小梦魇</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Magic: The Gathering – Duels of the Planeswalkers"><h2 id="h2jscript" onclick="ShowHide('Magic: The Gathering – Duels of the Planeswalkers')"><strong id="eye-Magic: The Gathering – Duels of the Planeswalkers" style="color: #007962;">&#x25BC;</strong><strong>Magic: The Gathering – Duels of the Planeswalkers<span>( 1 )</span></strong></h2></div>
+<div id="Magic: The Gathering – Duels of the Planeswalkers" class="cards">
+<figure class="card">
+  <a href="63876903-f1e1-4471-90e3-79f81004e003.html">
+  <img class="lozad" data-src="63876903-f1e1-4471-90e3-79f81004e003/1080ab6a-2e7a-4612-8b60-d71268200765.jpg"/>
+  <figcaption>万智牌2015</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Mario &amp; Luigi"><h2 id="h2jscript" onclick="ShowHide('Mario &amp; Luigi')"><strong id="eye-Mario &amp; Luigi" style="color: #007962;">&#x25BC;</strong><strong>Mario &amp; Luigi<span>( 1 )</span></strong></h2></div>
+<div id="Mario &amp; Luigi" class="cards">
+<figure class="card">
+  <a href="bf5c68b9-7ba4-4dd8-a159-855199445665.html">
+  <img class="lozad" data-src="bf5c68b9-7ba4-4dd8-a159-855199445665/646bcf1e-eed0-46b4-968b-ce68d6443d5c.jpg"/>
+  <figcaption>马里奥与路易基RPG</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Mario Kart"><h2 id="h2jscript" onclick="ShowHide('Mario Kart')"><strong id="eye-Mario Kart" style="color: #007962;">&#x25BC;</strong><strong>Mario Kart<span>( 1 )</span></strong></h2></div>
+<div id="Mario Kart" class="cards">
+<figure class="card">
+  <a href="b76bd32d-e64f-44b8-902f-d1f28f5a0fbf.html">
+  <img class="lozad" data-src="b76bd32d-e64f-44b8-902f-d1f28f5a0fbf/971ad38d-472d-4033-be04-5b6be5ec3a53.jpg"/>
+  <figcaption>马里奥赛车</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Metroid"><h2 id="h2jscript" onclick="ShowHide('Metroid')"><strong id="eye-Metroid" style="color: #007962;">&#x25BC;</strong><strong>Metroid<span>( 3 )</span></strong></h2></div>
+<div id="Metroid" class="cards">
+<figure class="card">
+  <a href="d4dda4f0-629e-468b-931c-395886f93817.html">
+  <img class="lozad" data-src="d4dda4f0-629e-468b-931c-395886f93817/9a556f76-8a69-4780-a525-a3f28c76df4b.jpg"/>
+  <figcaption>银河战士：生存恐惧</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="758ce9ea-5843-476f-89f0-06d68ac8a7dd.html">
+  <img class="lozad" data-src="758ce9ea-5843-476f-89f0-06d68ac8a7dd/0fbc7bfb-70e0-40a5-8fa5-741bcc23fe76.jpg"/>
+  <figcaption>银河战士：融合</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="e3caa021-d8a1-43aa-9896-8c513479f537.html">
+  <img class="lozad" data-src="e3caa021-d8a1-43aa-9896-8c513479f537/2e5045c4-c3fa-4565-8885-02a0bb57070e.jpg"/>
+  <figcaption>银河战士：零点任务</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Metroid Prime"><h2 id="h2jscript" onclick="ShowHide('Metroid Prime')"><strong id="eye-Metroid Prime" style="color: #007962;">&#x25BC;</strong><strong>Metroid Prime<span>( 1 )</span></strong></h2></div>
+<div id="Metroid Prime" class="cards">
+<figure class="card">
+  <a href="5b63c9bc-6d82-40f1-9282-c3ee96592818.html">
+  <img class="lozad" data-src="5b63c9bc-6d82-40f1-9282-c3ee96592818/80527f36-7693-43f2-9271-017e59345153.jpg"/>
+  <figcaption>银河战士究极复刻版</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Minecraft"><h2 id="h2jscript" onclick="ShowHide('Minecraft')"><strong id="eye-Minecraft" style="color: #007962;">&#x25BC;</strong><strong>Minecraft<span>( 1 )</span></strong></h2></div>
+<div id="Minecraft" class="cards">
+<figure class="card">
+  <a href="264acc2c-7944-42c8-ab5c-43aabf5f9b83.html">
+  <img class="lozad" data-src="264acc2c-7944-42c8-ab5c-43aabf5f9b83/1de6abcb-f880-4205-8a6d-8dda5f78b295.jpg"/>
+  <figcaption>我的世界</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Naruto: Path of the Ninja"><h2 id="h2jscript" onclick="ShowHide('Naruto: Path of the Ninja')"><strong id="eye-Naruto: Path of the Ninja" style="color: #007962;">&#x25BC;</strong><strong>Naruto: Path of the Ninja<span>( 1 )</span></strong></h2></div>
+<div id="Naruto: Path of the Ninja" class="cards">
+<figure class="card">
+  <a href="c543af3f-be03-49d0-a29a-c9f157d73816.html">
+  <img class="lozad" data-src="c543af3f-be03-49d0-a29a-c9f157d73816/1aadbd15-59e4-470d-9973-93a498d73669.jpg"/>
+  <figcaption>火影忍者：木叶战记</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Nekketsu High School"><h2 id="h2jscript" onclick="ShowHide('Nekketsu High School')"><strong id="eye-Nekketsu High School" style="color: #007962;">&#x25BC;</strong><strong>Nekketsu High School<span>( 1 )</span></strong></h2></div>
+<div id="Nekketsu High School" class="cards">
+<figure class="card">
+  <a href="1771d1d4-5cbf-4e29-b072-79f2626074ee.html">
+  <img class="lozad" data-src="1771d1d4-5cbf-4e29-b072-79f2626074ee/9df5c009-9e83-4fb5-8556-c865eba5418e.jpg"/>
+  <figcaption>热血足球</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Nioh"><h2 id="h2jscript" onclick="ShowHide('Nioh')"><strong id="eye-Nioh" style="color: #007962;">&#x25BC;</strong><strong>Nioh<span>( 1 )</span></strong></h2></div>
+<div id="Nioh" class="cards">
+<figure class="card">
+  <a href="854c1893-5516-4bfc-9d76-70106e54ef23.html">
+  <img class="lozad" data-src="854c1893-5516-4bfc-9d76-70106e54ef23/05d886b2-c27b-4052-aba8-de5aff8e0bfe.jpg"/>
+  <figcaption>仁王</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Ogre Battle"><h2 id="h2jscript" onclick="ShowHide('Ogre Battle')"><strong id="eye-Ogre Battle" style="color: #007962;">&#x25BC;</strong><strong>Ogre Battle<span>( 1 )</span></strong></h2></div>
+<div id="Ogre Battle" class="cards">
+<figure class="card">
+  <a href="ec3e0df7-b2e4-4f39-844f-372f56597305.html">
+  <img class="lozad" data-src="ec3e0df7-b2e4-4f39-844f-372f56597305/af5c16be-f58b-4f77-932e-9ead330439a3.jpg"/>
+  <figcaption>皇家骑士团：命运之轮</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Ori"><h2 id="h2jscript" onclick="ShowHide('Ori')"><strong id="eye-Ori" style="color: #007962;">&#x25BC;</strong><strong>Ori<span>( 1 )</span></strong></h2></div>
+<div id="Ori" class="cards">
+<figure class="card">
+  <a href="fd87c847-4587-4047-8f51-44ddb2dfb9e0.html">
+  <img class="lozad" data-src="fd87c847-4587-4047-8f51-44ddb2dfb9e0/ef2efaa7-ff46-4b13-b6d8-6c1a0f13b709.jpg"/>
+  <figcaption>奥日2：精灵与萤火意志</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Outer Wilds"><h2 id="h2jscript" onclick="ShowHide('Outer Wilds')"><strong id="eye-Outer Wilds" style="color: #007962;">&#x25BC;</strong><strong>Outer Wilds<span>( 1 )</span></strong></h2></div>
+<div id="Outer Wilds" class="cards">
+<figure class="card">
+  <a href="5493c81f-e5a3-4f5a-a660-ead70262f85f.html">
+  <img class="lozad" data-src="5493c81f-e5a3-4f5a-a660-ead70262f85f/cff88070-7317-485c-bd07-3b7b57379dc0.jpg"/>
+  <figcaption>星际拓荒</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Pok&#233;mon"><h2 id="h2jscript" onclick="ShowHide('Pok&#233;mon')"><strong id="eye-Pok&#233;mon" style="color: #007962;">&#x25BC;</strong><strong>Pok&#233;mon<span>( 2 )</span></strong></h2></div>
+<div id="Pok&#233;mon" class="cards">
+<figure class="card">
+  <a href="d7d7b5cc-b080-47b3-a9e3-886ba518d390.html">
+  <img class="lozad" data-src="d7d7b5cc-b080-47b3-a9e3-886ba518d390/5d3c407d-0c62-444c-861c-d59ff4d99a57.jpg"/>
+  <figcaption>口袋妖怪：火红</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="e8bb8aa0-70cc-437e-9e3b-cea1e73cf1c0.html">
+  <img class="lozad" data-src="e8bb8aa0-70cc-437e-9e3b-cea1e73cf1c0/072854c4-5c61-4004-8d6e-24dc2a9929dc.jpg"/>
+  <figcaption>口袋妖怪：绿宝石</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Super Mario Advance"><h2 id="h2jscript" onclick="ShowHide('Super Mario Advance')"><strong id="eye-Super Mario Advance" style="color: #007962;">&#x25BC;</strong><strong>Super Mario Advance<span>( 1 )</span></strong></h2></div>
+<div id="Super Mario Advance" class="cards">
+<figure class="card">
+  <a href="23fc026c-7a5e-49f9-9766-28d57ad11a1b.html">
+  <img class="lozad" data-src="23fc026c-7a5e-49f9-9766-28d57ad11a1b/ffbd4a78-7775-4bef-b780-b89d34c4a79e.jpg"/>
+  <figcaption>耀西岛</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Swords Of Legends"><h2 id="h2jscript" onclick="ShowHide('Swords Of Legends')"><strong id="eye-Swords Of Legends" style="color: #007962;">&#x25BC;</strong><strong>Swords Of Legends<span>( 1 )</span></strong></h2></div>
+<div id="Swords Of Legends" class="cards">
+<figure class="card">
+  <a href="f5238d98-6c23-4dff-a384-a61a5ceafdb7.html">
+  <img class="lozad" data-src="f5238d98-6c23-4dff-a384-a61a5ceafdb7/883db756-1e1c-4c08-8fb8-7bc4b574184f.jpg"/>
+  <figcaption>古剑奇谭3</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Teenage Mutant Ninja Turtles"><h2 id="h2jscript" onclick="ShowHide('Teenage Mutant Ninja Turtles')"><strong id="eye-Teenage Mutant Ninja Turtles" style="color: #007962;">&#x25BC;</strong><strong>Teenage Mutant Ninja Turtles<span>( 1 )</span></strong></h2></div>
+<div id="Teenage Mutant Ninja Turtles" class="cards">
+<figure class="card">
+  <a href="07c4195c-7add-4ef3-bc5e-e3468282f3e6.html">
+  <img class="lozad" data-src="07c4195c-7add-4ef3-bc5e-e3468282f3e6/ac142ca5-3f8f-4d3e-93e2-8a14aa7b118b.jpg"/>
+  <figcaption>忍者神龟3</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Terraria"><h2 id="h2jscript" onclick="ShowHide('Terraria')"><strong id="eye-Terraria" style="color: #007962;">&#x25BC;</strong><strong>Terraria<span>( 1 )</span></strong></h2></div>
+<div id="Terraria" class="cards">
+<figure class="card">
+  <a href="ce9f446d-12fb-4b8c-b338-63b112294fbf.html">
+  <img class="lozad" data-src="ce9f446d-12fb-4b8c-b338-63b112294fbf/2227c159-c328-4514-ace6-c0c0c001aae7.jpg"/>
+  <figcaption>泰拉瑞亚</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-The Elder Scrolls"><h2 id="h2jscript" onclick="ShowHide('The Elder Scrolls')"><strong id="eye-The Elder Scrolls" style="color: #007962;">&#x25BC;</strong><strong>The Elder Scrolls<span>( 1 )</span></strong></h2></div>
+<div id="The Elder Scrolls" class="cards">
+<figure class="card">
+  <a href="e8992a29-b6ed-4252-91ef-3c217697339b.html">
+  <img class="lozad" data-src="e8992a29-b6ed-4252-91ef-3c217697339b/2c4dff8a-535d-4a70-b8e7-8346b930de66.jpg"/>
+  <figcaption>上古卷轴5</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-The King of Fighters"><h2 id="h2jscript" onclick="ShowHide('The King of Fighters')"><strong id="eye-The King of Fighters" style="color: #007962;">&#x25BC;</strong><strong>The King of Fighters<span>( 2 )</span></strong></h2></div>
+<div id="The King of Fighters" class="cards">
+<figure class="card">
+  <a href="b2d13a77-1cf3-432a-bbdd-b2180cdbb5ce.html">
+  <img class="lozad" data-src="b2d13a77-1cf3-432a-bbdd-b2180cdbb5ce/d8dbe6e4-2c15-495d-894d-faaa82546ffa.jpg"/>
+  <figcaption>拳皇13</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="b9985345-57e3-4c8f-aa06-010982317c71.html">
+  <img class="lozad" data-src="b9985345-57e3-4c8f-aa06-010982317c71/d19bc7e5-60fa-4105-a462-5d925d1792b7.jpg"/>
+  <figcaption>拳皇EX2：咆哮之血</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-The Witcher"><h2 id="h2jscript" onclick="ShowHide('The Witcher')"><strong id="eye-The Witcher" style="color: #007962;">&#x25BC;</strong><strong>The Witcher<span>( 1 )</span></strong></h2></div>
+<div id="The Witcher" class="cards">
+<figure class="card">
+  <a href="dd434e24-593d-42ca-8ce7-d291ffeb8fc0.html">
+  <img class="lozad" data-src="dd434e24-593d-42ca-8ce7-d291ffeb8fc0/fdfb4d2f-d405-4281-b991-baf2a97480c9.jpg"/>
+  <figcaption>巫师3：狂猎</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-To the Moon"><h2 id="h2jscript" onclick="ShowHide('To the Moon')"><strong id="eye-To the Moon" style="color: #007962;">&#x25BC;</strong><strong>To the Moon<span>( 1 )</span></strong></h2></div>
+<div id="To the Moon" class="cards">
+<figure class="card">
+  <a href="77c50b0d-1a03-49ab-8ab0-7f7bbdb882ce.html">
+  <img class="lozad" data-src="77c50b0d-1a03-49ab-8ab0-7f7bbdb882ce/0899e1b6-2db1-46cf-a77c-c2f496883043.jpg"/>
+  <figcaption>去月球</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Torchlight"><h2 id="h2jscript" onclick="ShowHide('Torchlight')"><strong id="eye-Torchlight" style="color: #007962;">&#x25BC;</strong><strong>Torchlight<span>( 1 )</span></strong></h2></div>
+<div id="Torchlight" class="cards">
+<figure class="card">
+  <a href="4a34ad90-1596-4576-8682-de13c5dd20af.html">
+  <img class="lozad" data-src="4a34ad90-1596-4576-8682-de13c5dd20af/b9106a94-38fc-4f86-b327-7a0cb4035f3a.jpg"/>
+  <figcaption>火炬之光2</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Yakuza"><h2 id="h2jscript" onclick="ShowHide('Yakuza')"><strong id="eye-Yakuza" style="color: #007962;">&#x25BC;</strong><strong>Yakuza<span>( 1 )</span></strong></h2></div>
+<div id="Yakuza" class="cards">
+<figure class="card">
+  <a href="788b93b0-3bf6-4a83-99ad-1183240c76ed.html">
+  <img class="lozad" data-src="788b93b0-3bf6-4a83-99ad-1183240c76ed/5f7707af-f5ee-46d0-a2ca-20a83b56873e.jpg"/>
+  <figcaption>人中之龙0：誓约的场所</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Yu-Gi-Oh! World Championship"><h2 id="h2jscript" onclick="ShowHide('Yu-Gi-Oh! World Championship')"><strong id="eye-Yu-Gi-Oh! World Championship" style="color: #007962;">&#x25BC;</strong><strong>Yu-Gi-Oh! World Championship<span>( 1 )</span></strong></h2></div>
+<div id="Yu-Gi-Oh! World Championship" class="cards">
+<figure class="card">
+  <a href="89e36603-51f2-4652-a9e6-79b8daed24df.html">
+  <img class="lozad" data-src="89e36603-51f2-4652-a9e6-79b8daed24df/26265d2d-9f98-4af9-bf1c-af5b44310316.jpg"/>
+  <figcaption>游戏王：世界冠军2004</figcaption>
+  </a>
+</figure>
+
+</div><div id="quicklink-Zero Escape"><h2 id="h2jscript" onclick="ShowHide('Zero Escape')"><strong id="eye-Zero Escape" style="color: #007962;">&#x25BC;</strong><strong>Zero Escape<span>( 1 )</span></strong></h2></div>
+<div id="Zero Escape" class="cards">
+<figure class="card">
+  <a href="75ffcc07-d874-492a-bbb6-f5546034a506.html">
+  <img class="lozad" data-src="75ffcc07-d874-492a-bbb6-f5546034a506/99ade8fa-f13e-4306-815a-e952d5ad71ec.jpg"/>
+  <figcaption>999极限脱出</figcaption>
+  </a>
+</figure>
+
+</div>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+  <script>
+    const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+    observer.observe();
+    
+	// Get the input field
+	var input = document.getElementById("search");
+
+	// Execute a function when the user releases a key on the keyboard
+	input.addEventListener("keyup", function(event) {
+	  // Number 13 is the "Enter" key on the keyboard
+	  if (event.keyCode === 13) {
+		// Cancel the default action, if needed
+		event.preventDefault();
+		// Trigger the button element with a click
+		document.getElementById("searchbutton").click();
+	  }
+	});
+	
+    //Get the button:
+    mybutton = document.getElementById("BackTopButton");
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+	
+	function ShowHide(body_id){
+	var elem
+
+		elem = document.getElementById(body_id);
+		elemclick = document.getElementById("eye-" + body_id);
+		
+		if(!elem) return true;
+		if(!elemclick) return true;
+
+		if (elem.style.display == "none") {
+		  elem.style.display = "";
+		  elemclick.innerHTML = "&#x25BC;";
+		  elemclick.style.color = "#007962";
+		}
+		else {
+		  elem.style.display = "none";
+		  elemclick.innerHTML = "&#x25BA;";
+		  elemclick.style.color = "#790000";
+		}
+		return true;
+	}
+   </script>
+</html>
